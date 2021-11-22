@@ -1,1 +1,1 @@
-# dentistry-app
+# dental-app
