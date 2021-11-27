@@ -2,36 +2,24 @@ import React from "react";
 import { View } from "react-native";
 import styled from "styled-components/native";
 
-const Group = ({ title, items }) => {
+const Appointment = ({ user, diagnosis, active, time }) => {
   return (
     <GroupBlock>
-      <GroupTitle>{title}</GroupTitle>
-      {items.map((item, index) => {
-        return (
-          <GroupItem key={`${item.fullname}_${index}`}>
+      <GroupItem>
             <Avatar
               source={{
-                uri: item.user.avatar,
+                uri: user.avatar,
               }}
             ></Avatar>
             <View style={{ flex: 1 }}>
-              <FullName>{item.user.fullname}</FullName>
-              <GreyText>{item.diagnosis}</GreyText>
+              <FullName>{user.fullname}</FullName>
+              <GreyText>{diagnosis}</GreyText>
             </View>
-            <GroupDate active>{item.time}</GroupDate>
+            <GroupDate active={ active }>{time}</GroupDate>
           </GroupItem>
-        );
-      })}
     </GroupBlock>
   );
 };
-
-Group.defaultProps = {
-  groupTite: "Untitled",
-  items: [],
-};
-
-export default Group;
 
 const GroupDate = styled.Text`
   padding: 7px 15px;
@@ -68,14 +56,8 @@ const GroupItem = styled.TouchableOpacity`
   border-bottom-color: #f3f3f3;
 `;
 
-const GroupTitle = styled.Text`
-  font-weight: 800;
-  font-size: 22px;
-  color: #000;
-  text-align: left;
-  margin-bottom: 5px;
+const GroupBlock = styled.View`
+  padding: 10px 15px;
 `;
 
-const GroupBlock = styled.View`
-  padding: 0 15px;
-`;
+export default Appointment;
