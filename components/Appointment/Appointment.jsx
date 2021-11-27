@@ -4,20 +4,18 @@ import styled from "styled-components/native";
 
 const Appointment = ({ user, diagnosis, active, time }) => {
   return (
-    <GroupBlock>
-      <GroupItem>
-            <Avatar
-              source={{
-                uri: user.avatar,
-              }}
-            ></Avatar>
-            <View style={{ flex: 1 }}>
-              <FullName>{user.fullname}</FullName>
-              <GreyText>{diagnosis}</GreyText>
-            </View>
-            <GroupDate active={ active }>{time}</GroupDate>
-          </GroupItem>
-    </GroupBlock>
+    <GroupItem>
+      <Avatar
+        source={{
+          uri: user.avatar,
+        }}
+      ></Avatar>
+      <View style={{ flex: 1 }}>
+        <FullName>{user.fullname}</FullName>
+        <GreyText>{diagnosis}</GreyText>
+      </View>
+      <GroupDate active={active}>{time}</GroupDate>
+    </GroupItem>
   );
 };
 
@@ -51,13 +49,9 @@ const Avatar = styled.Image`
 const GroupItem = styled.TouchableOpacity`
   align-items: center;
   flex-direction: row;
-  padding: 10px 0;
+  padding: 10px;
   border-bottom-width: 1px;
   border-bottom-color: #f3f3f3;
-`;
-
-const GroupBlock = styled.View`
-  padding: 10px 15px;
 `;
 
 export default Appointment;

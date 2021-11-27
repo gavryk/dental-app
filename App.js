@@ -1,7 +1,8 @@
 import React from "react";
 import { SectionList } from "react-native";
 import styled from "styled-components/native";
-import {Appointment, SectionTitle} from "./components";
+
+import {Appointment, SectionTitle, PlusButton} from "./components";
 
 const DATA = [
   {
@@ -21,6 +22,14 @@ const DATA = [
         diagnosis: 'Bite Trauma, Primary',
         user: {
           fullname: 'Sem Arnold',
+          avatar: 'https://365psd.com/images/istock/previews/1009/100996291-male-avatar-profile-picture-vector.jpg'
+        }
+      },
+      {
+        time: '18:10', 
+        diagnosis: 'Bite Trauma, Primary',
+        user: {
+          fullname: 'Alan Wake',
           avatar: 'https://365psd.com/images/istock/previews/1009/100996291-male-avatar-profile-picture-vector.jpg'
         }
       }
@@ -52,6 +61,51 @@ const DATA = [
           fullname: 'Tim Terner',
           avatar: 'https://365psd.com/images/istock/previews/1009/100996291-male-avatar-profile-picture-vector.jpg'
         }
+      },
+      {
+        time: '17:15',
+        diagnosis: 'Poor Oral Hygiene',
+        user: {
+          fullname: 'John Doe',
+          avatar: 'https://365psd.com/images/istock/previews/1009/100996291-male-avatar-profile-picture-vector.jpg'
+        }
+      }
+    ]
+  },
+  {
+    title: '24 December',
+    data: [
+      {
+        time: '11:20', 
+        diagnosis: 'Chipped Teeth',
+        user: {
+          fullname: 'Anna Mitchel',
+          avatar: 'https://365psd.com/images/istock/previews/1009/100996291-male-avatar-profile-picture-vector.jpg'
+        }
+      },
+      {
+        time: '13:00', 
+        diagnosis: 'Tooth Decay',
+        user: {
+          fullname: 'Sem Arnold',
+          avatar: 'https://365psd.com/images/istock/previews/1009/100996291-male-avatar-profile-picture-vector.jpg'
+        }
+      },
+      {
+        time: '15:00',
+        diagnosis: 'Poor Oral Hygiene',
+        user: {
+          fullname: 'Tim Terner',
+          avatar: 'https://365psd.com/images/istock/previews/1009/100996291-male-avatar-profile-picture-vector.jpg'
+        }
+      },
+      {
+        time: '17:15',
+        diagnosis: 'Poor Oral Hygiene',
+        user: {
+          fullname: 'John Doe',
+          avatar: 'https://365psd.com/images/istock/previews/1009/100996291-male-avatar-profile-picture-vector.jpg'
+        }
       }
     ]
   }
@@ -68,11 +122,13 @@ export default function App() {
           <SectionTitle>{ title }</SectionTitle>
         )}
       />
+
+      <PlusButton />
     </Container>
   );
 }
 
 const Container = styled.View`
   flex: 1;
-  margin: 40px 0;
+  margin: 30px 0;
 `;
