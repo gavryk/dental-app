@@ -13,31 +13,10 @@ const App = () => {
   return (
     <NavigationContainer>
       {/* <SafeAreaView style={{ backgroundColor: '#2A86FF' }}/> */}
-      <Stack.Navigator 
-          initialRouteName="Home"
-          screenOptions={{
-            drawerActiveTintColor: '#2A86FF',
-            drawerInactiveTintColor: '#2A86FF',
-            drawerStyle: {
-              backgroundColor: '#fff',
-              width: 280,
-            },
-          }}
-        >
+      <Stack.Navigator initialRouteName="Home">
         <Stack.Screen 
           name="Home"
           component={HomeScreen}
-          options={{
-            title: "Home",
-            headerStyle: {
-              backgroundColor: "#2A86FF",
-            },
-            headerTintColor: "#fff",
-            headerTitleStyle: {
-              fontWeight: "bold",
-              fontSize: "18px",
-            }
-          }}
         />
         <Stack.Screen 
           name="Patient" 

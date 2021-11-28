@@ -1,6 +1,8 @@
 import React from "react";
 import { View } from "react-native";
 import styled from "styled-components/native";
+import GreyText  from "../GreyText/GreyText";
+
 
 const Appointment = ({ user, diagnosis, active, time, navigate }) => {
   return (
@@ -27,11 +29,6 @@ const GroupDate = styled.Text`
   font-size: 16px;
   background: ${(props) => (props.active ? "#2A86FF" : "#e9f5ff")};
   overflow: hidden;
-`;
-
-const GreyText = styled.Text`
-  font-size: 12px;
-  color: #8b979f;
 `;
 
 const FullName = styled.Text`

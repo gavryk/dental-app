@@ -122,6 +122,19 @@ const DATA = [
 ];
 
 const HomeScreen = ({ navigation }) => {
+  React.useLayoutEffect(() => {
+    navigation.setOptions({
+      title: "Home",
+      headerStyle: {
+        backgroundColor: "#2A86FF",
+      },
+      headerTintColor: "#fff",
+      headerTitleStyle: {
+        fontWeight: "bold",
+        fontSize: "18px",
+      }
+    });
+  }, [navigation]);
 
   return (
     <Container>
