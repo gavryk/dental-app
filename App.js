@@ -7,13 +7,13 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { HomeScreen, PatientScreen } from "./screens";
 
 const Stack = createNativeStackNavigator();
-const Drawer = createDrawerNavigator();
+// const Drawer = createDrawerNavigator();
 
 const App = () => {
   return (
     <NavigationContainer>
       {/* <SafeAreaView style={{ backgroundColor: '#2A86FF' }}/> */}
-      <Drawer.Navigator 
+      <Stack.Navigator 
           initialRouteName="Home"
           screenOptions={{
             drawerActiveTintColor: '#2A86FF',
@@ -24,7 +24,7 @@ const App = () => {
             },
           }}
         >
-        <Drawer.Screen 
+        <Stack.Screen 
           name="Home"
           component={HomeScreen}
           options={{
@@ -39,21 +39,11 @@ const App = () => {
             }
           }}
         />
-        <Drawer.Screen 
+        <Stack.Screen 
           name="Patient" 
-          component={PatientScreen} 
-          options={{
-            headerStyle: {
-              backgroundColor: "#2A86FF",
-            },
-            headerTintColor: "#fff",
-            headerTitleStyle: {
-              fontWeight: "bold",
-              fontSize: "18px",
-            }
-          }}
+          component={PatientScreen}
         />
-      </Drawer.Navigator>
+      </Stack.Navigator>
     </NavigationContainer>
   );
 };
