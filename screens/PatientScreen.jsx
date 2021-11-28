@@ -1,5 +1,5 @@
 import React from "react";
-import { Ionicons } from "@expo/vector-icons";
+import { FontAwesome  } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
 import styled from "styled-components/native";
 import { Text, View } from "react-native";
@@ -28,22 +28,33 @@ const PatientScreen = ({ navigation }) => {
 
   return (
     <Container>
-        <PatientFullName>Marina Sultanova</PatientFullName>
-        <GreyText>+3(063)-625-11-52</GreyText>
+      <PatientFullName>Marina Sultanova</PatientFullName>
+      <GreyText>+3(063)-625-11-52</GreyText>
+      <PatientButtons>
         <CustomButton>Teeth Formula</CustomButton>
+        <CustomButton width={'50px'} color={"#39ca1d"}><FontAwesome name="phone" size={20} color="white" /></CustomButton>
+      </PatientButtons>
     </Container>
   );
 };
 
+const PatientButtons = styled.View`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    margin: 20px 0;
+`;
+
 const PatientFullName = styled.Text`
-    font-size: 26px;
-    color: #000;
-    font-weight: 700;
-    margin-bottom: 5px;
+  font-size: 26px;
+  color: #000;
+  font-weight: 700;
+  margin-bottom: 5px;
 `;
 
 const Container = styled.View`
-    padding: 20px;
+  padding: 20px;
 `;
 
 // const BackBtn = styled.TouchableOpacity``;
