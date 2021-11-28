@@ -5,5 +5,6 @@ export default styled.Text`
   font-size: 22px;
   color: #000;
   text-align: left;
-  margin: 20px 10px 10px;
+  padding: 20px 10px 10px;
+  background-color: #fff;
 `;

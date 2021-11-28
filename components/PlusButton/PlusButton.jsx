@@ -2,7 +2,7 @@ import React from "react";
 import { Ionicons } from '@expo/vector-icons';
 import styled from "styled-components";
 
-const PlusButton = () => {
+const PlusButton = ({ toTop }) => {
     return (
         <PlusBtn style={{
             shadowColor: '#2A86FF',
@@ -12,7 +12,7 @@ const PlusButton = () => {
             },
             shadowOpacity: 0.7,
             shadowRadius: 10,
-            elevation: 18
+            elevation: 18,
         }}>
             <Ionicons name="ios-add" size={32} color="white" />
         </PlusBtn>

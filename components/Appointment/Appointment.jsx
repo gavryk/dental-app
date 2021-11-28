@@ -2,9 +2,9 @@ import React from "react";
 import { View } from "react-native";
 import styled from "styled-components/native";
 
-const Appointment = ({ user, diagnosis, active, time }) => {
+const Appointment = ({ user, diagnosis, active, time, navigate }) => {
   return (
-    <GroupItem>
+    <GroupItem onPress={() => navigate('Patient')}>
       <Avatar
         source={{
           uri: user.avatar,
