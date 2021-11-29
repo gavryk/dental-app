@@ -59,8 +59,8 @@ const PatientScreen = ({ navigation, route }) => {
 const AppointmentCardRow = styled.View`
   flex-direction: row;
   align-items: center;
-  margin-top: 7.5px;
-  margin-bottom: 7.5px;
+  margin-top: 5.5px;
+  margin-bottom: 5.5px;
 `;
 
 const AppointmentCardLabel = styled.Text`
@@ -74,7 +74,7 @@ const AppointmentCard = styled.View`
   shadow-opacity: 0.3;
   shadow-radius: 3px;
   shadow-offset: 0px 1px;
-  padding: 20px;
+  padding: 15px 20px;
   border-radius: 10px;
   background: #fff;
 `;
