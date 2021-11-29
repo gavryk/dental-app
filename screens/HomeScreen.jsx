@@ -13,8 +13,8 @@ const DATA = [
         active: true,
         user: {
           fullname: "Don Cabron",
-          avatar:
-            "https://365psd.com/images/istock/previews/1009/100996291-male-avatar-profile-picture-vector.jpg",
+          avatar: "https://365psd.com/images/istock/previews/1009/100996291-male-avatar-profile-picture-vector.jpg",
+          phone: '+38(555)-263-45-52'
         },
       },
       {
@@ -22,8 +22,8 @@ const DATA = [
         diagnosis: "Bite Trauma, Primary",
         user: {
           fullname: "Sem Arnold",
-          avatar:
-            "https://365psd.com/images/istock/previews/1009/100996291-male-avatar-profile-picture-vector.jpg",
+          avatar: "https://365psd.com/images/istock/previews/1009/100996291-male-avatar-profile-picture-vector.jpg",
+          phone: '+38(555)-263-65-45'
         },
       },
       {
@@ -31,8 +31,8 @@ const DATA = [
         diagnosis: "Bite Trauma, Primary",
         user: {
           fullname: "Alan Wake",
-          avatar:
-            "https://365psd.com/images/istock/previews/1009/100996291-male-avatar-profile-picture-vector.jpg",
+          avatar: "https://365psd.com/images/istock/previews/1009/100996291-male-avatar-profile-picture-vector.jpg",
+          phone: '+38(555)-263-55-55'
         },
       },
     ],
@@ -45,8 +45,8 @@ const DATA = [
         diagnosis: "Chipped Teeth",
         user: {
           fullname: "Anna Mitchel",
-          avatar:
-            "https://365psd.com/images/istock/previews/1009/100996291-male-avatar-profile-picture-vector.jpg",
+          avatar: "https://365psd.com/images/istock/previews/1009/100996291-male-avatar-profile-picture-vector.jpg",
+          phone: '+38(555)-444-45-52'
         },
       },
       {
@@ -54,8 +54,8 @@ const DATA = [
         diagnosis: "Tooth Decay",
         user: {
           fullname: "Sem Arnold",
-          avatar:
-            "https://365psd.com/images/istock/previews/1009/100996291-male-avatar-profile-picture-vector.jpg",
+          avatar: "https://365psd.com/images/istock/previews/1009/100996291-male-avatar-profile-picture-vector.jpg",
+          phone: '+38(555)-266-41-53'
         },
       },
       {
@@ -63,8 +63,8 @@ const DATA = [
         diagnosis: "Poor Oral Hygiene",
         user: {
           fullname: "Tim Terner",
-          avatar:
-            "https://365psd.com/images/istock/previews/1009/100996291-male-avatar-profile-picture-vector.jpg",
+          avatar: "https://365psd.com/images/istock/previews/1009/100996291-male-avatar-profile-picture-vector.jpg",
+          phone: '+38(555)-222-33-44'
         },
       },
       {
@@ -72,8 +72,8 @@ const DATA = [
         diagnosis: "Poor Oral Hygiene",
         user: {
           fullname: "John Doe",
-          avatar:
-            "https://365psd.com/images/istock/previews/1009/100996291-male-avatar-profile-picture-vector.jpg",
+          avatar: "https://365psd.com/images/istock/previews/1009/100996291-male-avatar-profile-picture-vector.jpg",
+          phone: '+38(555)-113-35-12'
         },
       },
     ],
@@ -82,12 +82,12 @@ const DATA = [
     title: "24 December",
     data: [
       {
-        time: "11:20",
+        time: "12:30",
         diagnosis: "Chipped Teeth",
         user: {
           fullname: "Anna Mitchel",
-          avatar:
-            "https://365psd.com/images/istock/previews/1009/100996291-male-avatar-profile-picture-vector.jpg",
+          avatar: "https://365psd.com/images/istock/previews/1009/100996291-male-avatar-profile-picture-vector.jpg",
+          phone: '+38(555)-444-45-52'
         },
       },
       {
@@ -95,8 +95,8 @@ const DATA = [
         diagnosis: "Tooth Decay",
         user: {
           fullname: "Sem Arnold",
-          avatar:
-            "https://365psd.com/images/istock/previews/1009/100996291-male-avatar-profile-picture-vector.jpg",
+          avatar: "https://365psd.com/images/istock/previews/1009/100996291-male-avatar-profile-picture-vector.jpg",
+          phone: '+38(555)-266-41-53'
         },
       },
       {
@@ -104,8 +104,8 @@ const DATA = [
         diagnosis: "Poor Oral Hygiene",
         user: {
           fullname: "Tim Terner",
-          avatar:
-            "https://365psd.com/images/istock/previews/1009/100996291-male-avatar-profile-picture-vector.jpg",
+          avatar: "https://365psd.com/images/istock/previews/1009/100996291-male-avatar-profile-picture-vector.jpg",
+          phone: '+38(555)-222-33-44'
         },
       },
       {
@@ -113,12 +113,53 @@ const DATA = [
         diagnosis: "Poor Oral Hygiene",
         user: {
           fullname: "John Doe",
-          avatar:
-            "https://365psd.com/images/istock/previews/1009/100996291-male-avatar-profile-picture-vector.jpg",
+          avatar: "https://365psd.com/images/istock/previews/1009/100996291-male-avatar-profile-picture-vector.jpg",
+          phone: '+38(555)-113-35-12'
         },
       },
     ],
   },
+  {
+    title: '18 December',
+    data: [
+      {
+        time: "12:30",
+        diagnosis: "Chipped Teeth",
+        user: {
+          fullname: "Anna Mitchel",
+          avatar: "https://365psd.com/images/istock/previews/1009/100996291-male-avatar-profile-picture-vector.jpg",
+          phone: '+38(555)-444-45-52'
+        },
+      },
+      {
+        time: "13:00",
+        diagnosis: "Tooth Decay",
+        user: {
+          fullname: "Sem Arnold",
+          avatar: "https://365psd.com/images/istock/previews/1009/100996291-male-avatar-profile-picture-vector.jpg",
+          phone: '+38(555)-266-41-53'
+        },
+      },
+      {
+        time: "15:00",
+        diagnosis: "Poor Oral Hygiene",
+        user: {
+          fullname: "Tim Terner",
+          avatar: "https://365psd.com/images/istock/previews/1009/100996291-male-avatar-profile-picture-vector.jpg",
+          phone: '+38(555)-222-33-44'
+        },
+      },
+      {
+        time: "17:15",
+        diagnosis: "Poor Oral Hygiene",
+        user: {
+          fullname: "John Doe",
+          avatar: "https://365psd.com/images/istock/previews/1009/100996291-male-avatar-profile-picture-vector.jpg",
+          phone: '+38(555)-113-35-12'
+        },
+      },
+    ]
+  }
 ];
 
 const HomeScreen = ({ navigation }) => {
@@ -141,7 +182,7 @@ const HomeScreen = ({ navigation }) => {
       <SectionList
         sections={DATA}
         keyExtractor={(item, index) => index}
-        renderItem={({ item }) => <Appointment navigate={navigation.navigate} {...item} />}
+        renderItem={({ item }) => <Appointment navigate={navigation.navigate} item={item} />}
         renderSectionHeader={({ section: { title } }) => (
           <SectionTitle>{title}</SectionTitle>
         )}
@@ -153,7 +194,7 @@ const HomeScreen = ({ navigation }) => {
 
 const Container = styled.View`
   flex: 1;
-  margin: 0 0 30px;
+  /* margin: 0 0 30px; */
   background: #fff;
 `;
 

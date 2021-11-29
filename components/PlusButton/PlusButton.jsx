@@ -21,7 +21,7 @@ const PlusButton = ({ toTop }) => {
 
 const PlusBtn = styled.TouchableOpacity`
     position: absolute;
-    bottom: 0;
+    bottom: 20px;
     right: 20px;
     align-items: center;
     justify-content: center;

@@ -4,9 +4,10 @@ import styled from "styled-components/native";
 import GreyText  from "../GreyText/GreyText";
 
 
-const Appointment = ({ user, diagnosis, active, time, navigate }) => {
+const Appointment = ({ navigate, item }) => {
+  const { user, diagnosis, active, time } = item;
   return (
-    <GroupItem onPress={() => navigate('Patient')}>
+    <GroupItem onPress={() => navigate('Patient', item)}>
       <Avatar
         source={{
           uri: user.avatar,
