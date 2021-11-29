@@ -12,6 +12,8 @@ const PatientScreen = ({ navigation }) => {
       title: "Patient Card",
       headerStyle: {
         backgroundColor: "#2A86FF",
+        elevation: 0.8,
+        shadowOpacity: 0.8
       },
       headerTintColor: "#fff",
       headerTitleStyle: {
@@ -28,7 +30,7 @@ const PatientScreen = ({ navigation }) => {
 
   return (
     <Container>
-      <PatientTop>
+      <PatientDetails>
         <PatientFullName>Marina Sultanova</PatientFullName>
         <GreyText>+3(063)-625-11-52</GreyText>
         <PatientButtons>
@@ -37,13 +39,17 @@ const PatientScreen = ({ navigation }) => {
             <FontAwesome name="phone" size={20} color="white" />
           </CustomButton>
         </PatientButtons>
-      </PatientTop>
+      </PatientDetails>
+
+      <PatientAppointments></PatientAppointments>
+
     </Container>
   );
 };
 
-const PatientTop = styled.View`
-  
+const PatientAppointments = styled.View`
+  background-color: #f8fafd;
+  flex: 1;
 `;
 
 const PatientButtons = styled.View`
@@ -62,9 +68,20 @@ const PatientFullName = styled.Text`
 `;
 
 const Container = styled.View`
-  padding: 20px;
+  background-color: #fff;
+  flex: 1;
+`;
+
+const PatientDetails = styled(Container)`
+  flex: .3;
+  padding: 15px;
+  /* padding: 15px; */
+  border-width: .5px;
+  border-color: #cccbcb8b;
+  border-style: solid;
 `;
 
 // const BackBtn = styled.TouchableOpacity``;
+
 
 export default PatientScreen;
