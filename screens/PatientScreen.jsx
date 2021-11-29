@@ -1,11 +1,14 @@
 import React from "react";
 import { FontAwesome } from "@expo/vector-icons";
+import { FontAwesome5 } from "@expo/vector-icons"; 
 import styled from "styled-components/native";
+
 import GreyText from "../components/GreyText/GreyText";
 import { CustomButton } from "../components";
+import { Text } from "react-native";
 
 const PatientScreen = ({ navigation, route }) => {
-  const { user, phone } = route.params;
+  const { user } = route.params;
 
   React.useLayoutEffect(() => {
     navigation.setOptions({
@@ -36,15 +39,50 @@ const PatientScreen = ({ navigation, route }) => {
         </PatientButtons>
       </PatientDetails>
 
-      <PatientAppointments></PatientAppointments>
+      <PatientAppointments>
+        <AppointmentCard>
+            <AppointmentCardRow>
+              <FontAwesome5 name="tooth" size={16} color="grey" />
+              <AppointmentCardLabel>Tooth: <Text style={{ fontWeight: '700' }}>12</Text></AppointmentCardLabel>
+            </AppointmentCardRow>
+            <AppointmentCardRow>
+              <FontAwesome5 name="clipboard-list" size={16} color="grey" />
+              <AppointmentCardLabel>Diagnosis: <Text style={{ fontWeight: '700' }}>Pulpit</Text></AppointmentCardLabel>
+            </AppointmentCardRow>
+        </AppointmentCard>
+      </PatientAppointments>
 
     </Container>
   );
 };
 
+const AppointmentCardRow = styled.View`
+  flex-direction: row;
+  align-items: center;
+  margin-top: 7.5px;
+  margin-bottom: 7.5px;
+`;
+
+const AppointmentCardLabel = styled.Text`
+  font-size: 16px;
+  margin-left: 10px;
+`;
+
+const AppointmentCard = styled.View`
+  shadow-color: grey;
+  elevation: 0.4;
+  shadow-opacity: 0.3;
+  shadow-radius: 3px;
+  shadow-offset: 0px 1px;
+  padding: 20px;
+  border-radius: 10px;
+  background: #fff;
+`;
+
 const PatientAppointments = styled.View`
   background-color: #f8fafd;
   flex: 1;
+  padding: 20px;
 `;
 
 const PatientButtons = styled.View`
