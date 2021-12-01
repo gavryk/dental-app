@@ -51,7 +51,7 @@ const PatientScreen = ({ navigation, route }) => {
             </AppointmentCardRow>
             <AppointmentCardRow style={{ marginTop: 15, justifyContent: 'space-between' }}>
               <Badge style={{ width: 200 }} active>11.10.2021 - 15:40</Badge>
-              <Badge color='green'>500$</Badge>
+              <Badge color='green'>100$</Badge>
             </AppointmentCardRow>
         </AppointmentCard>
       </PatientAppointments>
