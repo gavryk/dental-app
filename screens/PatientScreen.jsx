@@ -4,7 +4,7 @@ import { FontAwesome5 } from "@expo/vector-icons";
 import styled from "styled-components/native";
 
 import GreyText from "../components/GreyText/GreyText";
-import { CustomButton } from "../components";
+import { Badge, CustomButton } from "../components";
 import { Text } from "react-native";
 
 const PatientScreen = ({ navigation, route }) => {
@@ -48,6 +48,10 @@ const PatientScreen = ({ navigation, route }) => {
             <AppointmentCardRow>
               <FontAwesome5 name="clipboard-list" size={16} color="grey" />
               <AppointmentCardLabel>Diagnosis: <Text style={{ fontWeight: '700' }}>Pulpit</Text></AppointmentCardLabel>
+            </AppointmentCardRow>
+            <AppointmentCardRow style={{ justifyContent: 'space-between' }}>
+              <Badge style={{ width: 200 }} active>11.10.2021 - 15:40</Badge>
+              <Badge color="green">500$</Badge>
             </AppointmentCardRow>
         </AppointmentCard>
       </PatientAppointments>

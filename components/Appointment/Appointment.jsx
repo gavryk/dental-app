@@ -1,6 +1,7 @@
 import React from "react";
 import { View } from "react-native";
 import styled from "styled-components/native";
+import Badge  from "../Badge/Badge";
 import GreyText  from "../GreyText/GreyText";
 
 
@@ -17,20 +18,10 @@ const Appointment = ({ navigate, item }) => {
         <FullName>{user.fullname}</FullName>
         <GreyText>{diagnosis}</GreyText>
       </View>
-      <GroupDate active={active}>{time}</GroupDate>
+      <Badge active={active}>{time}</Badge>
     </GroupItem>
   );
 };
-
-const GroupDate = styled.Text`
-  padding: 7px 15px;
-  font-weight: 700;
-  color: ${(props) => (props.active ? "#fff" : "#4294ff")};
-  border-radius: 18px;
-  font-size: 16px;
-  background: ${(props) => (props.active ? "#2A86FF" : "#e9f5ff")};
-  overflow: hidden;
-`;
 
 const FullName = styled.Text`
   font-size: 18px;
