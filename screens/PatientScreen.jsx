@@ -49,9 +49,9 @@ const PatientScreen = ({ navigation, route }) => {
               <FontAwesome5 name="clipboard-list" size={16} color="grey" />
               <AppointmentCardLabel>Diagnosis: <Text style={{ fontWeight: '700' }}>Pulpit</Text></AppointmentCardLabel>
             </AppointmentCardRow>
-            <AppointmentCardRow style={{ justifyContent: 'space-between' }}>
+            <AppointmentCardRow style={{ marginTop: 15, justifyContent: 'space-between' }}>
               <Badge style={{ width: 200 }} active>11.10.2021 - 15:40</Badge>
-              <Badge color="green">500$</Badge>
+              <Badge color='green'>500$</Badge>
             </AppointmentCardRow>
         </AppointmentCard>
       </PatientAppointments>
