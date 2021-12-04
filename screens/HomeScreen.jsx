@@ -1,168 +1,18 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components/native";
 import { SectionList } from "react-native";
 import { Appointment, SectionTitle, PlusButton } from "../components";
-
-const DATA = [
-  {
-    title: "14 December",
-    data: [
-      {
-        time: "15:46",
-        diagnosis: "pulpit",
-        active: true,
-        user: {
-          fullname: "Don Cabron",
-          avatar: "https://365psd.com/images/istock/previews/1009/100996291-male-avatar-profile-picture-vector.jpg",
-          phone: '+38(555)-263-45-52'
-        },
-      },
-      {
-        time: "16:35",
-        diagnosis: "Bite Trauma, Primary",
-        user: {
-          fullname: "Sem Arnold",
-          avatar: "https://365psd.com/images/istock/previews/1009/100996291-male-avatar-profile-picture-vector.jpg",
-          phone: '+38(555)-263-65-45'
-        },
-      },
-      {
-        time: "18:10",
-        diagnosis: "Bite Trauma, Primary",
-        user: {
-          fullname: "Alan Wake",
-          avatar: "https://365psd.com/images/istock/previews/1009/100996291-male-avatar-profile-picture-vector.jpg",
-          phone: '+38(555)-263-55-55'
-        },
-      },
-    ],
-  },
-  {
-    title: "23 December",
-    data: [
-      {
-        time: "12:30",
-        diagnosis: "Chipped Teeth",
-        user: {
-          fullname: "Anna Mitchel",
-          avatar: "https://365psd.com/images/istock/previews/1009/100996291-male-avatar-profile-picture-vector.jpg",
-          phone: '+38(555)-444-45-52'
-        },
-      },
-      {
-        time: "13:00",
-        diagnosis: "Tooth Decay",
-        user: {
-          fullname: "Sem Arnold",
-          avatar: "https://365psd.com/images/istock/previews/1009/100996291-male-avatar-profile-picture-vector.jpg",
-          phone: '+38(555)-266-41-53'
-        },
-      },
-      {
-        time: "15:00",
-        diagnosis: "Poor Oral Hygiene",
-        user: {
-          fullname: "Tim Terner",
-          avatar: "https://365psd.com/images/istock/previews/1009/100996291-male-avatar-profile-picture-vector.jpg",
-          phone: '+38(555)-222-33-44'
-        },
-      },
-      {
-        time: "17:15",
-        diagnosis: "Poor Oral Hygiene",
-        user: {
-          fullname: "John Doe",
-          avatar: "https://365psd.com/images/istock/previews/1009/100996291-male-avatar-profile-picture-vector.jpg",
-          phone: '+38(555)-113-35-12'
-        },
-      },
-    ],
-  },
-  {
-    title: "24 December",
-    data: [
-      {
-        time: "12:30",
-        diagnosis: "Chipped Teeth",
-        user: {
-          fullname: "Anna Mitchel",
-          avatar: "https://365psd.com/images/istock/previews/1009/100996291-male-avatar-profile-picture-vector.jpg",
-          phone: '+38(555)-444-45-52'
-        },
-      },
-      {
-        time: "13:00",
-        diagnosis: "Tooth Decay",
-        user: {
-          fullname: "Sem Arnold",
-          avatar: "https://365psd.com/images/istock/previews/1009/100996291-male-avatar-profile-picture-vector.jpg",
-          phone: '+38(555)-266-41-53'
-        },
-      },
-      {
-        time: "15:00",
-        diagnosis: "Poor Oral Hygiene",
-        user: {
-          fullname: "Tim Terner",
-          avatar: "https://365psd.com/images/istock/previews/1009/100996291-male-avatar-profile-picture-vector.jpg",
-          phone: '+38(555)-222-33-44'
-        },
-      },
-      {
-        time: "17:15",
-        diagnosis: "Poor Oral Hygiene",
-        user: {
-          fullname: "John Doe",
-          avatar: "https://365psd.com/images/istock/previews/1009/100996291-male-avatar-profile-picture-vector.jpg",
-          phone: '+38(555)-113-35-12'
-        },
-      },
-    ],
-  },
-  {
-    title: '18 December',
-    data: [
-      {
-        time: "12:30",
-        diagnosis: "Chipped Teeth",
-        user: {
-          fullname: "Anna Mitchel",
-          avatar: "https://365psd.com/images/istock/previews/1009/100996291-male-avatar-profile-picture-vector.jpg",
-          phone: '+38(555)-444-45-52'
-        },
-      },
-      {
-        time: "13:00",
-        diagnosis: "Tooth Decay",
-        user: {
-          fullname: "Sem Arnold",
-          avatar: "https://365psd.com/images/istock/previews/1009/100996291-male-avatar-profile-picture-vector.jpg",
-          phone: '+38(555)-266-41-53'
-        },
-      },
-      {
-        time: "15:00",
-        diagnosis: "Poor Oral Hygiene",
-        user: {
-          fullname: "Tim Terner",
-          avatar: "https://365psd.com/images/istock/previews/1009/100996291-male-avatar-profile-picture-vector.jpg",
-          phone: '+38(555)-222-33-44'
-        },
-      },
-      {
-        time: "17:15",
-        diagnosis: "Poor Oral Hygiene",
-        user: {
-          fullname: "John Doe",
-          avatar: "https://365psd.com/images/istock/previews/1009/100996291-male-avatar-profile-picture-vector.jpg",
-          phone: '+38(555)-113-35-12'
-        },
-      },
-    ]
-  }
-];
+import axios from "axios";
 
 const HomeScreen = ({ navigation }) => {
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    axios.get('https://trycode.pw/c/KYNRI.json').then(({data}) => {
+      setData(data);
+    })
+  }, []);
+
   React.useLayoutEffect(() => {
     navigation.setOptions({
       title: "Home",
@@ -179,14 +29,16 @@ const HomeScreen = ({ navigation }) => {
 
   return (
     <Container>
-      <SectionList
-        sections={DATA}
+      {
+        data && <SectionList
+        sections={data}
         keyExtractor={(item, index) => index}
         renderItem={({ item }) => <Appointment navigate={navigation.navigate} item={item} />}
         renderSectionHeader={({ section: { title } }) => (
           <SectionTitle>{title}</SectionTitle>
         )}
       />
+      }
       <PlusButton />
     </Container>
   );

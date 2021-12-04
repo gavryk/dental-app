@@ -1,6 +1,7 @@
 import React from "react";
 import { FontAwesome } from "@expo/vector-icons";
-import { FontAwesome5 } from "@expo/vector-icons"; 
+import { FontAwesome5 } from "@expo/vector-icons";
+import { MaterialIcons } from '@expo/vector-icons';
 import styled from "styled-components/native";
 
 import GreyText from "../components/GreyText/GreyText";
@@ -41,6 +42,9 @@ const PatientScreen = ({ navigation, route }) => {
 
       <PatientAppointments>
         <AppointmentCard>
+            <MoreButton>
+              <MaterialIcons name="more-vert" size={24} color="rgba(0, 0, 0, .3)" />
+            </MoreButton>
             <AppointmentCardRow>
               <FontAwesome5 name="tooth" size={16} color="grey" />
               <AppointmentCardLabel>Tooth: <Text style={{ fontWeight: '700' }}>12</Text></AppointmentCardLabel>
@@ -59,6 +63,17 @@ const PatientScreen = ({ navigation, route }) => {
     </Container>
   );
 };
+
+const MoreButton = styled.TouchableOpacity`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+  width: 50px;
+  position: absolute;
+  top: 0;
+  right: 0;
+`;
 
 const AppointmentCardRow = styled.View`
   flex-direction: row;
@@ -81,6 +96,7 @@ const AppointmentCard = styled.View`
   padding: 15px 20px;
   border-radius: 10px;
   background: #fff;
+  position: relative;
 `;
 
 const PatientAppointments = styled.View`
