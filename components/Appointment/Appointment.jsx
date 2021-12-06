@@ -1,5 +1,5 @@
 import React from "react";
-import { Text, View } from "react-native";
+import { Text, TouchableWithoutFeedback, View } from "react-native";
 import styled from "styled-components/native";
 import Badge from "../Badge/Badge";
 import GreyText from "../GreyText/GreyText";
@@ -7,18 +7,20 @@ import GreyText from "../GreyText/GreyText";
 const Appointment = ({ navigate, item }) => {
   const { user, diagnosis, active, time } = item;
   return (
-    <GroupItem onPress={() => navigate("Patient", item)}>
-      <Avatar
-        source={{
-          uri: user.avatar,
-        }}
-      ></Avatar>
-      <View style={{ flex: 1 }}>
-        <FullName>{user.fullname}</FullName>
-        <GreyText>{diagnosis}</GreyText>
-      </View>
-      <Badge active={active}>{time}</Badge>
-    </GroupItem>
+    <TouchableWithoutFeedback onPress={() => navigate("Patient", item)}>
+      <GroupItem>
+        <Avatar
+          source={{
+            uri: user.avatar,
+          }}
+        ></Avatar>
+        <View style={{ flex: 1 }}>
+          <FullName>{user.fullname}</FullName>
+          <GreyText>{diagnosis}</GreyText>
+        </View>
+        <Badge active={active}>{time}</Badge>
+      </GroupItem>
+    </TouchableWithoutFeedback>
   );
 };
 
@@ -34,7 +36,7 @@ const Avatar = styled.Image`
   margin-right: 10px;
 `;
 
-const GroupItem = styled.TouchableOpacity`
+const GroupItem = styled.View`
   align-items: center;
   flex-direction: row;
   padding: 10px;
