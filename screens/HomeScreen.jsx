@@ -4,14 +4,17 @@ import { SectionList } from "react-native";
 import { Appointment, SectionTitle, PlusButton, SwipeableButtons } from "../components";
 import axios from "axios";
 import Swipeable from "react-native-gesture-handler/Swipeable";
+import { appointmentsApi } from "../utils/api";
 
 const HomeScreen = ({ navigation }) => {
   const [data, setData] = useState(null);
 
   useEffect(() => {
-    axios.get('https://trycode.pw/c/KYNRI.json').then(({data}) => {
-      setData(data);
-    })
+    appointmentsApi
+      .get()
+      .then(({ data }) => {
+        setData(data.data);
+      });
   }, []);
 
   React.useLayoutEffect(() => {

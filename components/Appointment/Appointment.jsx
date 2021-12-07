@@ -3,19 +3,25 @@ import { Text, TouchableWithoutFeedback, View } from "react-native";
 import styled from "styled-components/native";
 import Badge from "../Badge/Badge";
 import GreyText from "../GreyText/GreyText";
+import getAvatarColor from "../../utils/getAvatarColor";
 
 const Appointment = ({ navigate, item }) => {
-  const { user, diagnosis, active, time } = item;
+  const { patient, diagnosis, active, time } = item;
+  const avatarColors = getAvatarColor(patient.fullname[0].toUpperCase());
   return (
     <TouchableWithoutFeedback onPress={() => navigate("Patient", item)}>
       <GroupItem>
         <Avatar
-          source={{
-            uri: user.avatar,
+          style={{
+            backgroundColor: avatarColors.background,
           }}
-        ></Avatar>
+        >
+          <Letter style={{ color: avatarColors.color }}>
+            {patient.fullname[0].toUpperCase()}
+          </Letter>
+        </Avatar>
         <View style={{ flex: 1 }}>
-          <FullName>{user.fullname}</FullName>
+          <FullName>{patient.fullname}</FullName>
           <GreyText>{diagnosis}</GreyText>
         </View>
         <Badge active={active}>{time}</Badge>
@@ -29,11 +35,19 @@ const FullName = styled.Text`
   font-weight: 600;
 `;
 
-const Avatar = styled.Image`
+const Letter = styled.Text`
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: -1px;
+`;
+
+const Avatar = styled.ImageBackground`
   border-radius: 50px;
   width: 50px;
   height: 50px;
   margin-right: 10px;
+  align-items: center;
+  justify-content: center;
 `;
 
 const GroupItem = styled.View`
