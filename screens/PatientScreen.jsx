@@ -9,7 +9,7 @@ import { Badge, CustomButton } from "../components";
 import { Text } from "react-native";
 
 const PatientScreen = ({ navigation, route }) => {
-  const { user } = route.params;
+  const { patient } = route.params;
 
   React.useLayoutEffect(() => {
     navigation.setOptions({
@@ -30,8 +30,8 @@ const PatientScreen = ({ navigation, route }) => {
   return (
     <Container>
       <PatientDetails>
-        <PatientFullName>{ user.fullname }</PatientFullName>
-        <GreyText>{ user.phone }</GreyText>
+        <PatientFullName>{ patient.fullname }</PatientFullName>
+        <GreyText>{ patient.phone }</GreyText>
         <PatientButtons>
           <CustomButton>Teeth Formula</CustomButton>
           <CustomButton width={"50px"} color={"#39ca1d"}>

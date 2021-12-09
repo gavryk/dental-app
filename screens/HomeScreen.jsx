@@ -56,7 +56,7 @@ const HomeScreen = ({ navigation }) => {
           )}
         />
       )}
-      <PlusButton />
+      <PlusButton navigate={navigation.navigate} />
     </Container>
   );
 };

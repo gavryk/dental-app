@@ -2,21 +2,24 @@ import React from "react";
 import { Ionicons } from '@expo/vector-icons';
 import styled from "styled-components";
 
-const PlusButton = ({ toTop }) => {
+const PlusButton = ({ navigate }) => {
     return (
-        <PlusBtn style={{
-            shadowColor: '#2A86FF',
-            shadowOffset: {
-                width: 0,
-                height: 7
-            },
-            shadowOpacity: 0.7,
-            shadowRadius: 10,
-            elevation: 18,
-        }}>
-            <Ionicons name="ios-add" size={32} color="white" />
-        </PlusBtn>
-    )
+      <PlusBtn
+        onPress={() => navigate("AddPatient")}
+        style={{
+          shadowColor: "#2A86FF",
+          shadowOffset: {
+            width: 0,
+            height: 7,
+          },
+          shadowOpacity: 0.7,
+          shadowRadius: 10,
+          elevation: 18,
+        }}
+      >
+        <Ionicons name="ios-add" size={32} color="white" />
+      </PlusBtn>
+    );
 }
 
 const PlusBtn = styled.TouchableOpacity`
