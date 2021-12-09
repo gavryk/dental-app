@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const CustonButton = ({children, color, width}) => {
+const CustonButton = ({children, color, width, onPress}) => {
     return (
-        <Button width={width} color={color}>
+        <Button width={width} color={color} onPress={onPress}>
             <ButtonText>{children}</ButtonText>
         </Button>
     )
