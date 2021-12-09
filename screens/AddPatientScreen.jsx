@@ -33,6 +33,7 @@ const AddPatientScreen = ({ navigation }) => {
     });
   };
 
+  
   const onSubmit = () => {
     patientsApi
       .add(values)
