@@ -8,14 +8,21 @@ import { appointmentsApi } from "../utils/api";
 
 const HomeScreen = ({ navigation }) => {
   const [data, setData] = useState(null);
+  const [isLoading, setIsLoading] = React.useState(false);
 
-  useEffect(() => {
+  const fetchAppointments = () => {
+    setIsLoading(true);
     appointmentsApi
       .get()
       .then(({ data }) => {
         setData(data.data);
+      })
+      .finally((e) => {
+        setIsLoading(false);
       });
-  }, []);
+  };
+
+  useEffect(fetchAppointments, []);
 
   React.useLayoutEffect(() => {
     navigation.setOptions({
@@ -33,20 +40,22 @@ const HomeScreen = ({ navigation }) => {
 
   return (
     <Container>
-      {
-        data && <SectionList
-        sections={data}
-        keyExtractor={(item, index) => index}
-        renderItem={({ item }) => (
-          <Swipeable renderRightActions={ SwipeableButtons }>
-            <Appointment navigate={navigation.navigate} item={item} />
-          </Swipeable>
-        )}
-        renderSectionHeader={({ section: { title } }) => (
-          <SectionTitle>{title}</SectionTitle>
-        )}
-      />
-      }
+      {data && (
+        <SectionList
+          sections={data}
+          onRefresh={fetchAppointments}
+          refreshing={isLoading}
+          keyExtractor={(item, index) => index}
+          renderItem={({ item }) => (
+            <Swipeable renderRightActions={SwipeableButtons}>
+              <Appointment navigate={navigation.navigate} item={item} />
+            </Swipeable>
+          )}
+          renderSectionHeader={({ section: { title } }) => (
+            <SectionTitle>{title}</SectionTitle>
+          )}
+        />
+      )}
       <PlusButton />
     </Container>
   );
