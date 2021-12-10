@@ -6,11 +6,12 @@ import styled from "styled-components/native";
 
 import GreyText from "../components/GreyText/GreyText";
 import { Badge, CustomButton } from "../components";
-import { Text } from "react-native";
+import { Text, ActivityIndicator } from "react-native";
 import { patientsApi } from "../utils/api";
 
 const PatientScreen = ({ navigation, route }) => {
   const [appointments, setAppointments] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
   const { patient } = route.params;
 
   React.useLayoutEffect(() => {
@@ -36,6 +37,9 @@ const PatientScreen = ({ navigation, route }) => {
       .show(id)
       .then(({data}) => {
         setAppointments(data.data.appointments);
+        setIsLoading(false);
+      }).catch(() => {
+        setIsLoading(false);
       })
   }, [])
 
@@ -52,39 +56,47 @@ const PatientScreen = ({ navigation, route }) => {
         </PatientButtons>
       </PatientDetails>
 
-      { appointments.map((appointment) => (
-          <PatientAppointments key={ appointment._id }>
-            <AppointmentCard>
-              <MoreButton>
-                <MaterialIcons
-                  name="more-vert"
-                  size={24}
-                  color="rgba(0, 0, 0, .3)"
-                />
-              </MoreButton>
-              <AppointmentCardRow>
-                <FontAwesome5 name="tooth" size={16} color="grey" />
-                <AppointmentCardLabel>
-                  Tooth: <Text style={{ fontWeight: "700" }}>{ appointment.dentNumber }</Text>
-                </AppointmentCardLabel>
-              </AppointmentCardRow>
-              <AppointmentCardRow>
-                <FontAwesome5 name="clipboard-list" size={16} color="grey" />
-                <AppointmentCardLabel>
-                  Diagnosis: <Text style={{ fontWeight: "700" }}>{ appointment.diagnosis }</Text>
-                </AppointmentCardLabel>
-              </AppointmentCardRow>
-              <AppointmentCardRow
-                style={{ marginTop: 15, justifyContent: "space-between" }}
-              >
-                <Badge style={{ width: 200 }} active>
-                  { appointment.date } - { appointment.time }
-                </Badge>
-                <Badge color="green">{ appointment.price }$</Badge>
-              </AppointmentCardRow>
-            </AppointmentCard>
-          </PatientAppointments>
-        ))}
+      { isLoading 
+      ? (<ActivityIndicator size="large" color="#2A86FF" />) 
+      : (appointments.map((appointment) => (
+        <PatientAppointments key={appointment._id}>
+          <AppointmentCard>
+            <MoreButton>
+              <MaterialIcons
+                name="more-vert"
+                size={24}
+                color="rgba(0, 0, 0, .3)"
+              />
+            </MoreButton>
+            <AppointmentCardRow>
+              <FontAwesome5 name="tooth" size={16} color="grey" />
+              <AppointmentCardLabel>
+                Tooth:{" "}
+                <Text style={{ fontWeight: "700" }}>
+                  {appointment.dentNumber}
+                </Text>
+              </AppointmentCardLabel>
+            </AppointmentCardRow>
+            <AppointmentCardRow>
+              <FontAwesome5 name="clipboard-list" size={16} color="grey" />
+              <AppointmentCardLabel>
+                Diagnosis:{" "}
+                <Text style={{ fontWeight: "700" }}>
+                  {appointment.diagnosis}
+                </Text>
+              </AppointmentCardLabel>
+            </AppointmentCardRow>
+            <AppointmentCardRow
+              style={{ marginTop: 15, justifyContent: "space-between" }}
+            >
+              <Badge style={{ width: 200 }} active>
+                {appointment.date} - {appointment.time}
+              </Badge>
+              <Badge color="green">{appointment.price}$</Badge>
+            </AppointmentCardRow>
+          </AppointmentCard>
+        </PatientAppointments>
+      )))}
     </Container>
   );
 };
