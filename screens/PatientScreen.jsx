@@ -52,9 +52,8 @@ const PatientScreen = ({ navigation, route }) => {
         </PatientButtons>
       </PatientDetails>
 
-      {appointments &&
-        appointments.map((appointment) => (
-          <PatientAppointments>
+      { appointments.map((appointment) => (
+          <PatientAppointments key={ appointment._id }>
             <AppointmentCard>
               <MoreButton>
                 <MaterialIcons
