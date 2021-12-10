@@ -32,7 +32,7 @@ const PatientScreen = ({ navigation, route }) => {
 
   useEffect(() => {
     const id = patient._id; 
-
+    //Get Patient Appointments
     patientsApi
       .show(id)
       .then(({data}) => {
