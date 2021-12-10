@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FontAwesome } from "@expo/vector-icons";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { MaterialIcons } from '@expo/vector-icons';
@@ -7,8 +7,10 @@ import styled from "styled-components/native";
 import GreyText from "../components/GreyText/GreyText";
 import { Badge, CustomButton } from "../components";
 import { Text } from "react-native";
+import { patientsApi } from "../utils/api";
 
 const PatientScreen = ({ navigation, route }) => {
+  const [appointments, setAppointments] = useState([]);
   const { patient } = route.params;
 
   React.useLayoutEffect(() => {
@@ -27,11 +29,21 @@ const PatientScreen = ({ navigation, route }) => {
     });
   }, [navigation]);
 
+  useEffect(() => {
+    const id = patient._id; 
+
+    patientsApi
+      .show(id)
+      .then(({data}) => {
+        setAppointments(data.data.appointments);
+      })
+  }, [])
+
   return (
     <Container>
       <PatientDetails>
-        <PatientFullName>{ patient.fullname }</PatientFullName>
-        <GreyText>{ patient.phone }</GreyText>
+        <PatientFullName>{patient.fullname}</PatientFullName>
+        <GreyText>{patient.phone}</GreyText>
         <PatientButtons>
           <CustomButton>Teeth Formula</CustomButton>
           <CustomButton width={"50px"} color={"#39ca1d"}>
@@ -40,26 +52,40 @@ const PatientScreen = ({ navigation, route }) => {
         </PatientButtons>
       </PatientDetails>
 
-      <PatientAppointments>
-        <AppointmentCard>
-            <MoreButton>
-              <MaterialIcons name="more-vert" size={24} color="rgba(0, 0, 0, .3)" />
-            </MoreButton>
-            <AppointmentCardRow>
-              <FontAwesome5 name="tooth" size={16} color="grey" />
-              <AppointmentCardLabel>Tooth: <Text style={{ fontWeight: '700' }}>12</Text></AppointmentCardLabel>
-            </AppointmentCardRow>
-            <AppointmentCardRow>
-              <FontAwesome5 name="clipboard-list" size={16} color="grey" />
-              <AppointmentCardLabel>Diagnosis: <Text style={{ fontWeight: '700' }}>Pulpit</Text></AppointmentCardLabel>
-            </AppointmentCardRow>
-            <AppointmentCardRow style={{ marginTop: 15, justifyContent: 'space-between' }}>
-              <Badge style={{ width: 200 }} active>11.10.2021 - 15:40</Badge>
-              <Badge color='green'>100$</Badge>
-            </AppointmentCardRow>
-        </AppointmentCard>
-      </PatientAppointments>
-
+      {appointments &&
+        appointments.map((appointment) => (
+          <PatientAppointments>
+            <AppointmentCard>
+              <MoreButton>
+                <MaterialIcons
+                  name="more-vert"
+                  size={24}
+                  color="rgba(0, 0, 0, .3)"
+                />
+              </MoreButton>
+              <AppointmentCardRow>
+                <FontAwesome5 name="tooth" size={16} color="grey" />
+                <AppointmentCardLabel>
+                  Tooth: <Text style={{ fontWeight: "700" }}>{ appointment.dentNumber }</Text>
+                </AppointmentCardLabel>
+              </AppointmentCardRow>
+              <AppointmentCardRow>
+                <FontAwesome5 name="clipboard-list" size={16} color="grey" />
+                <AppointmentCardLabel>
+                  Diagnosis: <Text style={{ fontWeight: "700" }}>{ appointment.diagnosis }</Text>
+                </AppointmentCardLabel>
+              </AppointmentCardRow>
+              <AppointmentCardRow
+                style={{ marginTop: 15, justifyContent: "space-between" }}
+              >
+                <Badge style={{ width: 200 }} active>
+                  { appointment.date } - { appointment.time }
+                </Badge>
+                <Badge color="green">{ appointment.price }$</Badge>
+              </AppointmentCardRow>
+            </AppointmentCard>
+          </PatientAppointments>
+        ))}
     </Container>
   );
 };

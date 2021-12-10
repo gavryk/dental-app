@@ -89,6 +89,7 @@ const AddPatientScreen = ({ navigation }) => {
   );
 };
 
+
 const ButtonView = styled.View`
   width: 100%;
   height: auto;
