@@ -39,9 +39,10 @@ const HomeScreen = ({ navigation }) => {
 
   const removeAppointments = (id) => {
     const result = data.map(group => {
-      group.data.filter(item => item._id === id); 
+      group.data = group.data.filter(item => item._id !== id); 
       return group;
     })
+    setData(result);
     appointmentsApi
       .remove(id);
   }

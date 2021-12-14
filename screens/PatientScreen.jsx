@@ -6,7 +6,7 @@ import styled from "styled-components/native";
 
 import GreyText from "../components/GreyText/GreyText";
 import { Badge, CustomButton } from "../components";
-import { Text, ActivityIndicator, Linking } from "react-native";
+import { Text, ActivityIndicator, Linking, View, SectionList } from "react-native";
 import { patientsApi } from "../utils/api";
 
 const PatientScreen = ({ navigation, route }) => {
@@ -44,60 +44,68 @@ const PatientScreen = ({ navigation, route }) => {
   }, [])
 
   return (
-    <Container>
+    <View style={{ flex: 1 }}>
       <PatientDetails>
         <PatientFullName>{patient.fullname}</PatientFullName>
         <GreyText>{patient.phone}</GreyText>
         <PatientButtons>
           <CustomButton>Teeth Formula</CustomButton>
-          <CustomButton onPress={() => Linking.openURL(`tel: ${ patient.phone }`)} width={"50px"} color={"#39ca1d"}>
+          <CustomButton
+            onPress={() => Linking.openURL(`tel: ${patient.phone}`)}
+            width={"50px"}
+            color={"#39ca1d"}
+          >
             <FontAwesome name="phone" size={20} color="white" />
           </CustomButton>
         </PatientButtons>
       </PatientDetails>
 
-      { isLoading 
-      ? (<ActivityIndicator size="large" color="#2A86FF" />) 
-      : (appointments.map((appointment) => (
-        <PatientAppointments key={appointment._id}>
-          <AppointmentCard>
-            <MoreButton>
-              <MaterialIcons
-                name="more-vert"
-                size={24}
-                color="rgba(0, 0, 0, .3)"
-              />
-            </MoreButton>
-            <AppointmentCardRow>
-              <FontAwesome5 name="tooth" size={16} color="grey" />
-              <AppointmentCardLabel>
-                Tooth:{" "}
-                <Text style={{ fontWeight: "700" }}>
-                  {appointment.dentNumber}
-                </Text>
-              </AppointmentCardLabel>
-            </AppointmentCardRow>
-            <AppointmentCardRow>
-              <FontAwesome5 name="clipboard-list" size={16} color="grey" />
-              <AppointmentCardLabel>
-                Diagnosis:{" "}
-                <Text style={{ fontWeight: "700" }}>
-                  {appointment.diagnosis}
-                </Text>
-              </AppointmentCardLabel>
-            </AppointmentCardRow>
-            <AppointmentCardRow
-              style={{ marginTop: 15, justifyContent: "space-between" }}
-            >
-              <Badge style={{ width: 200 }} active>
-                {appointment.date} - {appointment.time}
-              </Badge>
-              <Badge color="green">{appointment.price}$</Badge>
-            </AppointmentCardRow>
-          </AppointmentCard>
-        </PatientAppointments>
-      )))}
-    </Container>
+      <PatientAppointments>
+        <Container>
+          {isLoading ? (
+            <ActivityIndicator size="large" color="#2A86FF" />
+          ) : (
+            appointments.map((appointment) => (
+              <AppointmentCard key={appointment._id}>
+                <MoreButton>
+                  <MaterialIcons
+                    name="more-vert"
+                    size={24}
+                    color="rgba(0, 0, 0, .3)"
+                  />
+                </MoreButton>
+                <AppointmentCardRow>
+                  <FontAwesome5 name="tooth" size={16} color="grey" />
+                  <AppointmentCardLabel>
+                    Tooth:{" "}
+                    <Text style={{ fontWeight: "700" }}>
+                      {appointment.dentNumber}
+                    </Text>
+                  </AppointmentCardLabel>
+                </AppointmentCardRow>
+                <AppointmentCardRow>
+                  <FontAwesome5 name="clipboard-list" size={16} color="grey" />
+                  <AppointmentCardLabel>
+                    Diagnosis:{" "}
+                    <Text style={{ fontWeight: "700" }}>
+                      {appointment.diagnosis}
+                    </Text>
+                  </AppointmentCardLabel>
+                </AppointmentCardRow>
+                <AppointmentCardRow
+                  style={{ marginTop: 15, justifyContent: "space-between" }}
+                >
+                  <Badge style={{ width: 200 }} active>
+                    {appointment.date} - {appointment.time}
+                  </Badge>
+                  <Badge color="green">{appointment.price}$</Badge>
+                </AppointmentCardRow>
+              </AppointmentCard>
+            ))
+          )}
+        </Container>
+      </PatientAppointments>
+    </View>
   );
 };
 
@@ -134,12 +142,13 @@ const AppointmentCard = styled.View`
   border-radius: 10px;
   background: #fff;
   position: relative;
+  margin-bottom: 20px;
 `;
 
 const PatientAppointments = styled.View`
   background-color: #f8fafd;
-  flex: 1;
   padding: 20px;
+  flex: 1;
 `;
 
 const PatientButtons = styled.View`
@@ -158,17 +167,20 @@ const PatientFullName = styled.Text`
 `;
 
 const Container = styled.View`
-  background-color: #fff;
   flex: 1;
+  justify-content: flex-start;
 `;
 
 const PatientDetails = styled(Container)`
-  flex: .3;
+  flex-basis: 25%;
+  max-height: 25%;
+  height: auto;
   padding: 15px;
   /* padding: 15px; */
   border-width: .5px;
   border-color: #cccbcb8b;
   border-style: solid;
+  background: #fff;
 `;
 
 // const BackBtn = styled.TouchableOpacity``;
