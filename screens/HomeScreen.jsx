@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components/native";
-import { SectionList } from "react-native";
+import { SectionList, Alert } from "react-native";
 import { Appointment, SectionTitle, PlusButton, SwipeableButtons } from "../components";
 import Swipeable from "react-native-gesture-handler/Swipeable";
 import { appointmentsApi } from "../utils/api";
@@ -38,13 +38,32 @@ const HomeScreen = ({ navigation }) => {
   useEffect(fetchAppointments, []);
 
   const removeAppointments = (id) => {
-    const result = data.map(group => {
-      group.data = group.data.filter(item => item._id !== id); 
-      return group;
-    })
-    setData(result);
-    appointmentsApi
-      .remove(id);
+     Alert.alert(
+      'Delete Appointment',
+      'Are you sure you want to delete the appointment?',
+      [
+        {
+          text: 'Cancel',
+          onPress: () => console.log('Cancel Pressed'),
+          style: 'cancel'
+        },
+        {
+          text: 'Delete',
+          onPress: () => {
+            setIsLoading(true);
+            appointmentsApi
+              .remove(id)
+              .then(() => {
+                fetchAppointments();
+              })
+              .catch(() => {
+                setIsLoading(false);
+              });
+          }
+        }
+      ],
+      { cancelable: false }
+    );
   }
   
   return (
