@@ -6,7 +6,7 @@ import styled from "styled-components/native";
 
 import GreyText from "../components/GreyText/GreyText";
 import { Badge, CustomButton } from "../components";
-import { Text, ActivityIndicator } from "react-native";
+import { Text, ActivityIndicator, Linking } from "react-native";
 import { patientsApi } from "../utils/api";
 
 const PatientScreen = ({ navigation, route }) => {
@@ -50,7 +50,7 @@ const PatientScreen = ({ navigation, route }) => {
         <GreyText>{patient.phone}</GreyText>
         <PatientButtons>
           <CustomButton>Teeth Formula</CustomButton>
-          <CustomButton width={"50px"} color={"#39ca1d"}>
+          <CustomButton onPress={() => Linking.openURL(`tel: ${ patient.phone }`)} width={"50px"} color={"#39ca1d"}>
             <FontAwesome name="phone" size={20} color="white" />
           </CustomButton>
         </PatientButtons>
