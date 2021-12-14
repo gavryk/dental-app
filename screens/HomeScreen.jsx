@@ -66,6 +66,7 @@ const HomeScreen = ({ navigation }) => {
     );
   }
   
+  
   return (
     <Container>
       {data && (
