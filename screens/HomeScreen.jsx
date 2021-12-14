@@ -56,7 +56,9 @@ const HomeScreen = ({ navigation }) => {
           refreshing={isLoading}
           keyExtractor={(item, index) => index}
           renderItem={({ item }) => (
-            <Swipeable renderRightActions={(progress) => SwipeableButtons(progress, item._id, removeAppointments)}>
+            <Swipeable 
+              key={item._id}
+              renderRightActions={(progress) => SwipeableButtons(progress, item._id, removeAppointments)}>
               <Appointment navigate={navigation.navigate} item={item} />
             </Swipeable>
           )}

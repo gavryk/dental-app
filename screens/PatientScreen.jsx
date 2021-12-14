@@ -145,7 +145,7 @@ const AppointmentCard = styled.View`
   margin-bottom: 20px;
 `;
 
-const PatientAppointments = styled.View`
+const PatientAppointments = styled.ScrollView`
   background-color: #f8fafd;
   padding: 20px;
   flex: 1;
