@@ -2,13 +2,26 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components/native";
 import { SectionList } from "react-native";
 import { Appointment, SectionTitle, PlusButton, SwipeableButtons } from "../components";
-import axios from "axios";
 import Swipeable from "react-native-gesture-handler/Swipeable";
 import { appointmentsApi } from "../utils/api";
 
 const HomeScreen = ({ navigation }) => {
   const [data, setData] = useState(null);
   const [isLoading, setIsLoading] = React.useState(false);
+  
+  React.useLayoutEffect(() => {
+    navigation.setOptions({
+      title: "Home",
+      headerStyle: {
+        backgroundColor: "#2A86FF",
+      },
+      headerTintColor: "#fff",
+      headerTitleStyle: {
+        fontWeight: "bold",
+        fontSize: "18px",
+      }
+    });
+  }, [navigation]);
 
   const fetchAppointments = () => {
     setIsLoading(true);
@@ -24,20 +37,15 @@ const HomeScreen = ({ navigation }) => {
 
   useEffect(fetchAppointments, []);
 
-  React.useLayoutEffect(() => {
-    navigation.setOptions({
-      title: "Home",
-      headerStyle: {
-        backgroundColor: "#2A86FF",
-      },
-      headerTintColor: "#fff",
-      headerTitleStyle: {
-        fontWeight: "bold",
-        fontSize: "18px",
-      }
-    });
-  }, [navigation]);
-
+  const removeAppointments = (id) => {
+    const result = data.map(group => {
+      group.data.filter(item => item._id === id); 
+      return group;
+    })
+    appointmentsApi
+      .remove(id);
+  }
+  
   return (
     <Container>
       {data && (
@@ -47,7 +55,7 @@ const HomeScreen = ({ navigation }) => {
           refreshing={isLoading}
           keyExtractor={(item, index) => index}
           renderItem={({ item }) => (
-            <Swipeable renderRightActions={SwipeableButtons}>
+            <Swipeable renderRightActions={(progress) => SwipeableButtons(progress, item._id, removeAppointments)}>
               <Appointment navigate={navigation.navigate} item={item} />
             </Swipeable>
           )}
