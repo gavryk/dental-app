@@ -13,9 +13,14 @@ import {
 } from "native-base";
 import { CustomButton } from "../components";
 import { appointmentsApi } from "../utils/api";
+import { useEffect } from "react/cjs/react.development";
 
 const AddAppointmentScreen = ({ navigation }) => {
   const [values, setValues] = useState({});
+
+  useEffect(() => {
+    console.log(values);
+  }, [values]);
 
   React.useLayoutEffect(() => {
     navigation.setOptions({
@@ -33,12 +38,24 @@ const AddAppointmentScreen = ({ navigation }) => {
     });
   }, [navigation]);
 
-  const handleChange = (name, e) => {
-    const text = e.nativeEvent.text;
+  const fieldsName = {
+    diagnosis: "Diagnosis",
+    dentNumber: "Dent Number",
+    price: "Price",
+    date: "Date",
+    time: "Time",
+  };
+
+  const setFieldValue = (name, value) => {
     setValues({
       ...values,
-      [name]: text,
+      [name]: value,
     });
+  }
+
+  const handleChange = (name, e) => {
+    const text = e.nativeEvent.text;
+    setFieldValue(name, text);
   };
 
   const onSubmit = () => {
@@ -86,15 +103,14 @@ const AddAppointmentScreen = ({ navigation }) => {
                 endIcon: <CheckIcon size="5" />,
               }}
               mt={1}
-              onValueChange={(e) =>
-                handleChange("diagnosis", e)
-              }
+              onValueChange={(e) => setFieldValue("diagnosis", e)}
+              selectedValue={values.diagnosis}
             >
-              <Select.Item label="UX Research" value="ux" />
-              <Select.Item label="Web Development" value="web" />
-              <Select.Item label="Cross Platform Development" value="cross" />
-              <Select.Item label="UI Designing" value="ui" />
-              <Select.Item label="Backend Development" value="backend" />
+              <Select.Item label="Pulpit" value="Pulpit" />
+              <Select.Item label="Periodontitis" value="Periodontitis" />
+              <Select.Item label="Oral cancer" value="Oral Cancer" />
+              <Select.Item label="Tooth Abscesses" value="Tooth Abscesses" />
+              <Select.Item label="Prosthetics" value="Prosthetics" />
             </Select>
           </Center>
           <Center>
