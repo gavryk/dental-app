@@ -5,7 +5,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 import styled from "styled-components/native";
 
 import GreyText from "../components/GreyText/GreyText";
-import { Badge, CustomButton } from "../components";
+import { Badge, CustomButton, PlusButton } from "../components";
 import { Text, ActivityIndicator, Linking, View, SectionList } from "react-native";
 import { patientsApi } from "../utils/api";
 
@@ -105,6 +105,8 @@ const PatientScreen = ({ navigation, route }) => {
           )}
         </Container>
       </PatientAppointments>
+
+      <PlusButton navigate={navigation.navigate} refScreen="AddAppointment" />
     </View>
   );
 };

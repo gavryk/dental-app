@@ -76,8 +76,11 @@ const HomeScreen = ({ navigation }) => {
           refreshing={isLoading}
           keyExtractor={(item, index) => item._id}
           renderItem={({ item }) => (
-            <Swipeable 
-              renderRightActions={(progress) => SwipeableButtons(progress, item._id, removeAppointments)}>
+            <Swipeable
+              renderRightActions={(progress) =>
+                SwipeableButtons(progress, item._id, removeAppointments)
+              }
+            >
               <Appointment navigate={navigation.navigate} item={item} />
             </Swipeable>
           )}
@@ -86,7 +89,7 @@ const HomeScreen = ({ navigation }) => {
           )}
         />
       )}
-      <PlusButton navigate={navigation.navigate} />
+      <PlusButton navigate={navigation.navigate} refScreen="AddPatient" />
     </Container>
   );
 };
