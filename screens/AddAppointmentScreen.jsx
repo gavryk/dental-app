@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Text } from "react-native";
+import { Text, View } from "react-native";
 import styled from "styled-components";
 import { Ionicons } from "@expo/vector-icons";
 import {
@@ -17,6 +17,7 @@ import DateTimePicker from "@react-native-community/datetimepicker";
 
 const AddAppointmentScreen = ({ navigation }) => {
   const [datePick, setDatePick] = useState(new Date());
+  const [timePick, setTimePick] = useState(new Date());
 
   const [values, setValues] = useState({
     diagnosis: "Pulpit",
@@ -133,9 +134,9 @@ const AddAppointmentScreen = ({ navigation }) => {
               clearButtonMode="while-editing"
             />
           </Center>
-          <Center>
+          <View style={{ justifyContent: "flex-start", width: 100 }}>
             <DateTimePicker
-              style={{ width: 320, backgroundColor: "white" }}
+              style={{ width: 350, backgroundColor: "white" }}
               value={datePick}
               maximumDate={new Date(2300, 10, 20)}
               minimumDate={new Date(1950, 0, 1)}
@@ -145,11 +146,31 @@ const AddAppointmentScreen = ({ navigation }) => {
               onChange={(e, selectedDate) => {
                 const currentDate = selectedDate || date;
                 setDatePick(currentDate);
-                let formattedDate = `${currentDate.getMonth() + 1}.${currentDate.getDate()}.${currentDate.getFullYear()}`;
+                let formattedDate = `${
+                  currentDate.getMonth() + 1
+                }.${currentDate.getDate()}.${currentDate.getFullYear()}`;
                 setFieldValue("date", formattedDate);
               }}
             />
-          </Center>
+            <DateTimePicker
+              style={{ width: 350, backgroundColor: "white" }}
+              value={timePick}
+              mode="time"
+              timeZoneOffsetInMinutes={60}
+              display="compact"
+              onChange={(e, selectedTime) => {
+                setTimePick(selectedTime);
+                let hh = selectedTime.getUTCHours() + 1;
+                let mm = selectedTime.getUTCMinutes();
+                hh = hh < 10 ? `0${hh}` : hh;
+                hh = hh == 24 ? `00` : hh;
+                mm = mm < 10 ? `0${mm}` : mm;
+  
+                let myDate = `${hh}:${mm}`;
+                setFieldValue("time", myDate);
+              }}
+            />
+          </View>
         </Stack>
         <ButtonView style={{ flex: 1 }}>
           <CustomButton onPress={onSubmit} color="#2A86FF">
