@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Text, View } from "react-native";
+import React, { useEffect, useState } from "react";
+import { Text } from "react-native";
 import styled from "styled-components";
 import { Ionicons } from "@expo/vector-icons";
 import {
@@ -13,20 +13,25 @@ import {
 } from "native-base";
 import { CustomButton } from "../components";
 import { appointmentsApi } from "../utils/api";
-import { useEffect } from "react/cjs/react.development";
+import DateTimePicker from "@react-native-community/datetimepicker";
 
 const AddAppointmentScreen = ({ navigation }) => {
-  const [values, setValues] = useState({});
+  const [datePick, setDatePick] = useState(new Date());
 
-  useEffect(() => {
-    console.log(values);
-  }, [values]);
+  const [values, setValues] = useState({
+    diagnosis: "Pulpit",
+    dentNumber: "",
+    price: "",
+    date: `${datePick.getMonth() + 1}-${datePick.getDate()}-${datePick.getFullYear()}`,
+    time: null,
+  });
+  console.log(values);
 
   React.useLayoutEffect(() => {
     navigation.setOptions({
       title: "Add Appointment",
       headerStyle: {
-        backgroundColor: "#2a9714",
+        backgroundColor: "#2A86FF",
         elevation: 0.8,
         shadowOpacity: 0.8,
       },
@@ -92,7 +97,7 @@ const AddAppointmentScreen = ({ navigation }) => {
           <Center>
             <Select
               height="50"
-              minWidth="350"
+              minWidth="95%"
               accessibilityLabel="Choose Diagnosis"
               placeholder="Choose Diagnosis"
               variant="underlined"
@@ -128,9 +133,26 @@ const AddAppointmentScreen = ({ navigation }) => {
               clearButtonMode="while-editing"
             />
           </Center>
+          <Center>
+            <DateTimePicker
+              style={{ width: 320, backgroundColor: "white" }}
+              value={datePick}
+              maximumDate={new Date(2300, 10, 20)}
+              minimumDate={new Date(1950, 0, 1)}
+              dateFormat="dayofweek day month"
+              mode="date"
+              display="compact"
+              onChange={(e, selectedDate) => {
+                const currentDate = selectedDate || date;
+                setDatePick(currentDate);
+                let formattedDate = `${currentDate.getMonth() + 1}-${currentDate.getDate()}-${currentDate.getFullYear()}`;
+                setFieldValue("date", formattedDate);
+              }}
+            />
+          </Center>
         </Stack>
-        <ButtonView style={{}}>
-          <CustomButton onPress={onSubmit} color="#65bd48">
+        <ButtonView style={{ flex: 1 }}>
+          <CustomButton onPress={onSubmit} color="#2A86FF">
             <Ionicons name="ios-add" size={24} color="white" />
             <Text>Add Appointment</Text>
           </CustomButton>
