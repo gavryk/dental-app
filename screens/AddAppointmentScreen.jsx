@@ -22,7 +22,7 @@ const AddAppointmentScreen = ({ navigation }) => {
     diagnosis: "Pulpit",
     dentNumber: "",
     price: "",
-    date: `${datePick.getMonth() + 1}-${datePick.getDate()}-${datePick.getFullYear()}`,
+    date: `${datePick.getMonth() + 1}.${datePick.getDate()}.${datePick.getFullYear()}`,
     time: null,
   });
   console.log(values);
@@ -145,7 +145,7 @@ const AddAppointmentScreen = ({ navigation }) => {
               onChange={(e, selectedDate) => {
                 const currentDate = selectedDate || date;
                 setDatePick(currentDate);
-                let formattedDate = `${currentDate.getMonth() + 1}-${currentDate.getDate()}-${currentDate.getFullYear()}`;
+                let formattedDate = `${currentDate.getMonth() + 1}.${currentDate.getDate()}.${currentDate.getFullYear()}`;
                 setFieldValue("date", formattedDate);
               }}
             />
