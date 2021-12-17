@@ -5,9 +5,10 @@ import { Appointment, SectionTitle, PlusButton, SwipeableButtons } from "../comp
 import Swipeable from "react-native-gesture-handler/Swipeable";
 import { appointmentsApi } from "../utils/api";
 
-const HomeScreen = ({ navigation }) => {
+const HomeScreen = ({ navigation, route }) => {
   const [data, setData] = useState(null);
   const [isLoading, setIsLoading] = React.useState(false);
+  const [lastUpdateTime, setlastUpdateTime] = useState(null);
   
   React.useLayoutEffect(() => {
     navigation.setOptions({
@@ -36,6 +37,8 @@ const HomeScreen = ({ navigation }) => {
   };
 
   useEffect(fetchAppointments, []);
+
+  useEffect(fetchAppointments, [route.params]);
 
   const removeAppointments = (id) => {
      Alert.alert(

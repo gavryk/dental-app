@@ -78,7 +78,7 @@ const AddAppointmentScreen = ({ navigation, route }) => {
     appointmentsApi
       .add(values)
       .then(() => {
-        navigation.navigate("Home");
+        navigation.navigate("Home", { lastUpdate: new Date() });
       })
       .catch((e) => {
         alert("BAD");
@@ -87,7 +87,7 @@ const AddAppointmentScreen = ({ navigation, route }) => {
 
   return (
     <Container>
-      <NativeBaseProvider>
+      <NativeBaseProvider style={{ flex: 1 }}>
         <View style={{ flex: 1 }}>
           <Stack space={4} mx={1}>
             <Center>
