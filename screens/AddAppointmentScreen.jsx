@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from "react";
-import { Text, View } from "react-native";
+import React, { useState } from "react";
+import { Text, View, TouchableWithoutFeedback, Keyboard } from "react-native";
 import styled from "styled-components";
 import { Ionicons } from "@expo/vector-icons";
 import {
   Center,
   Input,
   NativeBaseProvider,
-  FormControl,
   Select,
   CheckIcon,
   Stack,
@@ -36,8 +35,6 @@ const AddAppointmentScreen = ({ navigation }) => {
     date: `${datePick.getMonth() + 1}.${datePick.getDate()}.${datePick.getFullYear()}`,
     time: convertTime(timePick),
   });
-
-  console.log(values);
 
   React.useLayoutEffect(() => {
     navigation.setOptions({
@@ -88,7 +85,7 @@ const AddAppointmentScreen = ({ navigation }) => {
 
   return (
     <Container>
-      <NativeBaseProvider style={{ flex: 0.25 }}>
+      <NativeBaseProvider style={{ flex: 1 }}>
         <Stack space={4} mx={1}>
           <Center>
             <Input
@@ -102,7 +99,6 @@ const AddAppointmentScreen = ({ navigation }) => {
               label="Dent Number"
               value={values.dentNumber}
               onChange={(e) => handleChange("dentNumber", e)}
-              autoFocus
               clearButtonMode="while-editing"
             />
           </Center>
@@ -145,9 +141,13 @@ const AddAppointmentScreen = ({ navigation }) => {
               clearButtonMode="while-editing"
             />
           </Center>
-          <View style={{ justifyContent: "flex-start", width: 100 }}>
+          <DateTimeView>
             <DateTimePicker
-              style={{ width: 350, backgroundColor: "white" }}
+              style={{
+                backgroundColor: "white",
+                flexBasis: "30%",
+                width: "30%",
+              }}
               value={datePick}
               maximumDate={new Date(2300, 10, 20)}
               minimumDate={new Date(1950, 0, 1)}
@@ -164,35 +164,47 @@ const AddAppointmentScreen = ({ navigation }) => {
               }}
             />
             <DateTimePicker
-              style={{ width: 350, backgroundColor: "white" }}
+              style={{
+                width: "100%",
+                flex: 1
+              }}
               value={timePick}
               mode="time"
               timeZoneOffsetInMinutes={60}
-              display="compact"
               onChange={(e, selectedTime) => {
                 setTimePick(selectedTime);
                 let myDate = convertTime(selectedTime);
                 setFieldValue("time", myDate);
               }}
             />
-          </View>
+          </DateTimeView>
         </Stack>
-        <ButtonView style={{ flex: 1 }}>
-          <CustomButton onPress={onSubmit} color="#2A86FF">
-            <Ionicons name="ios-add" size={24} color="white" />
-            <Text>Add Appointment</Text>
-          </CustomButton>
-        </ButtonView>
       </NativeBaseProvider>
+      <ButtonView style={{ justifyContent: "flex-start" }}>
+        <CustomButton onPress={onSubmit} color="#2A86FF">
+          <Ionicons name="ios-add" size={24} color="white" />
+          <Text>Add Appointment</Text>
+        </CustomButton>
+      </ButtonView>
     </Container>
   );
 };
 
+const DateTimeView = styled.View`
+  display: flex;
+  flex: 1;
+  width: 100%;
+  justify-content: space-between;
+  flex-direction: row;
+  align-items: center;
+  padding: 20px 0;
+`;
+
 const ButtonView = styled.View`
   width: 100%;
   height: auto;
-  flex: 0.12;
-  margin-top: 20px;
+  flex: .1;
+  margin-bottom: 50px;
 `;
 
 const Container = styled.View`
