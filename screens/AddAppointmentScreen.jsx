@@ -15,6 +15,16 @@ import { CustomButton } from "../components";
 import { appointmentsApi } from "../utils/api";
 import DateTimePicker from "@react-native-community/datetimepicker";
 
+const convertTime = (time) => {
+  let hh = time.getUTCHours() + 1;
+  let mm = time.getUTCMinutes();
+  hh = hh < 10 ? `0${hh}` : hh;
+  hh = hh == 24 ? `00` : hh;
+  mm = mm < 10 ? `0${mm}` : mm;
+
+  return `${hh}:${mm}`;
+}
+
 const AddAppointmentScreen = ({ navigation }) => {
   const [datePick, setDatePick] = useState(new Date());
   const [timePick, setTimePick] = useState(new Date());
@@ -24,8 +34,9 @@ const AddAppointmentScreen = ({ navigation }) => {
     dentNumber: "",
     price: "",
     date: `${datePick.getMonth() + 1}.${datePick.getDate()}.${datePick.getFullYear()}`,
-    time: null,
+    time: convertTime(timePick),
   });
+
   console.log(values);
 
   React.useLayoutEffect(() => {
@@ -160,13 +171,7 @@ const AddAppointmentScreen = ({ navigation }) => {
               display="compact"
               onChange={(e, selectedTime) => {
                 setTimePick(selectedTime);
-                let hh = selectedTime.getUTCHours() + 1;
-                let mm = selectedTime.getUTCMinutes();
-                hh = hh < 10 ? `0${hh}` : hh;
-                hh = hh == 24 ? `00` : hh;
-                mm = mm < 10 ? `0${mm}` : mm;
-  
-                let myDate = `${hh}:${mm}`;
+                let myDate = convertTime(selectedTime);
                 setFieldValue("time", myDate);
               }}
             />
