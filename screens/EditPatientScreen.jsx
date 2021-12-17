@@ -2,18 +2,25 @@ import React, { useState } from "react";
 import { Text, View } from "react-native";
 import styled from "styled-components";
 import { Ionicons } from "@expo/vector-icons";
-import { Center, Input, NativeBaseProvider, FormControl , Stack } from "native-base";
+import {
+  Center,
+  Input,
+  NativeBaseProvider,
+  FormControl,
+  Stack,
+} from "native-base";
 import { CustomButton } from "../components";
 import { patientsApi } from "../utils";
 
-const AddPatientScreen = ({ navigation }) => {
+const EditPatientScreen = ({ navigation, route }) => {
   const [values, setValues] = useState({});
+  const { fullname, phone, _id } = route.params;
 
   React.useLayoutEffect(() => {
     navigation.setOptions({
-      title: "Add Patient",
+      title: "Edit Patient",
       headerStyle: {
-        backgroundColor: "#2a9714",
+        backgroundColor: "#b1b1b1",
         elevation: 0.8,
         shadowOpacity: 0.8,
       },
@@ -33,10 +40,9 @@ const AddPatientScreen = ({ navigation }) => {
     });
   };
 
-  
   const onSubmit = () => {
     patientsApi
-      .add(values)
+      .update(_id, values)
       .then(() => {
         navigation.navigate("Patients", { lastUpdateTime: new Date() });
       })
@@ -48,7 +54,7 @@ const AddPatientScreen = ({ navigation }) => {
   return (
     <Container>
       <NativeBaseProvider>
-        <View style={{ flex: .3 }}>
+        <View style={{ flex: 0.3 }}>
           <Stack space={4} mx={1}>
             <Center>
               <Input
@@ -83,14 +89,13 @@ const AddPatientScreen = ({ navigation }) => {
         <ButtonView style={{}}>
           <CustomButton onPress={onSubmit} color="#65bd48">
             <Ionicons name="ios-add" size={24} color="white" />
-            <Text>Add Patient</Text>
+            <Text>Save</Text>
           </CustomButton>
         </ButtonView>
       </NativeBaseProvider>
     </Container>
   );
 };
-
 
 const ButtonView = styled.View`
   width: 100%;
@@ -110,5 +115,4 @@ const Container = styled.View`
   height: 100%;
 `;
 
-
-export default AddPatientScreen;
+export default EditPatientScreen;

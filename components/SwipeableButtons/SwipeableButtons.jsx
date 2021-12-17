@@ -4,9 +4,9 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import { MaterialIcons } from '@expo/vector-icons'; 
+import { MaterialIcons } from '@expo/vector-icons';
 
-const SwipeableButtons = (progress, id, removeItem) => {
+const SwipeableButtons = (progress, id, removeItem, editItem, item) => {
   const scale = progress.interpolate({
     inputRange: [0, 100],
     outputRange: [0, 1],
@@ -32,7 +32,7 @@ const SwipeableButtons = (progress, id, removeItem) => {
           padding: 20,
         }}
       >
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => editItem(item)}>
           <MaterialIcons name="edit" size={28} color="white" />
         </TouchableOpacity>
       </View>

@@ -41,7 +41,6 @@ const PatientsScreen = ({ navigation, route }) => {
       .get()
       .then(({ data }) => {
         setData(data.data);
-        console.log(data);
       })
       .finally((e) => {
         setIsLoading(false);
@@ -85,6 +84,10 @@ const PatientsScreen = ({ navigation, route }) => {
     );
   };
 
+  const editItem = (item) => {
+    navigation.navigate("EditPatient", item);
+  }
+
   return (
     <Container>
       {data && (
@@ -102,7 +105,7 @@ const PatientsScreen = ({ navigation, route }) => {
                 backgroundColor: "#e7e4e4",
               }}
               inputStyle={{
-                  color: '#000'
+                color: "#000",
               }}
               lightTheme={true}
               platform="default"
@@ -125,7 +128,7 @@ const PatientsScreen = ({ navigation, route }) => {
             renderItem={({ item }) => (
               <Swipeable
                 renderRightActions={(progress) =>
-                  SwipeableButtons(progress, item._id, removeItem)
+                  SwipeableButtons(progress, item._id, removeItem, editItem, item)
                 }
               >
                 <Appointment

@@ -6,8 +6,9 @@ import styled from "styled-components/native";
 
 import GreyText from "../components/GreyText/GreyText";
 import { Badge, CustomButton, PlusButton } from "../components";
-import { Text, ActivityIndicator, Linking, View, SectionList } from "react-native";
+import { Text, ActivityIndicator, Linking, View } from "react-native";
 import { patientsApi } from "../utils/api";
+import { phoneFormat } from "../utils";
 
 const PatientScreen = ({ navigation, route }) => {
   const [appointments, setAppointments] = useState([]);
@@ -47,7 +48,7 @@ const PatientScreen = ({ navigation, route }) => {
     <View style={{ flex: 1 }}>
       <PatientDetails>
         <PatientFullName>{patient.fullname}</PatientFullName>
-        <GreyText>{patient.phone}</GreyText>
+        <GreyText>{ phoneFormat(patient.phone)}</GreyText>
         <PatientButtons>
           <CustomButton>Teeth Formula</CustomButton>
           <CustomButton
