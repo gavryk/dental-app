@@ -91,9 +91,18 @@ const PatientsScreen = ({ navigation, route }) => {
         <>
           <View style={{ padding: 0 }}>
             <SearchBar
-              placeholder="Type Here..."
+              placeholder="Search Patient"
               containerStyle={{
                 padding: 10,
+                backgroundColor: "#fff",
+                borderWidth: 0,
+                marginBottom: 10,
+              }}
+              inputContainerStyle={{
+                backgroundColor: "#e7e4e4",
+              }}
+              inputStyle={{
+                  color: '#000'
               }}
               lightTheme={true}
               platform="default"
@@ -103,7 +112,13 @@ const PatientsScreen = ({ navigation, route }) => {
             />
           </View>
           <FlatList
-            data={data}
+            data={data.filter((item) => {
+              return (
+                item.fullname
+                  .toLowerCase()
+                  .indexOf(searchValue.toLowerCase()) >= 0
+              );
+            })}
             onRefresh={fetchPatients}
             refreshing={isLoading}
             keyExtractor={(item, index) => item._id}
