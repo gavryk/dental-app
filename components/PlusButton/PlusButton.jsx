@@ -2,10 +2,10 @@ import React from "react";
 import { Ionicons } from "@expo/vector-icons";
 import styled from "styled-components";
 
-const PlusButton = ({ navigate, refScreen }) => {
+const PlusButton = ({ navigate, refScreen, param }) => {
   return (
     <PlusBtn
-      onPress={() => navigate(refScreen)}
+      onPress={() => navigate(refScreen, param && param)}
       style={{
         shadowColor: "#2A86FF",
         shadowOffset: {

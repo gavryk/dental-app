@@ -11,7 +11,7 @@ const HomeScreen = ({ navigation }) => {
   
   React.useLayoutEffect(() => {
     navigation.setOptions({
-      title: "Home",
+      title: "Appointments List",
       headerStyle: {
         backgroundColor: "#2A86FF",
       },

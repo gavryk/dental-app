@@ -14,6 +14,8 @@ const PatientScreen = ({ navigation, route }) => {
   const [isLoading, setIsLoading] = useState(true);
   const { patient } = route.params;
 
+  console.log(patient);
+
   React.useLayoutEffect(() => {
     navigation.setOptions({
       title: "Patient Card",
@@ -106,7 +108,11 @@ const PatientScreen = ({ navigation, route }) => {
         </Container>
       </PatientAppointments>
 
-      <PlusButton navigate={navigation.navigate} refScreen="AddAppointment" />
+      <PlusButton
+        navigate={navigation.navigate}
+        param={patient._id}
+        refScreen="AddAppointment"
+      />
     </View>
   );
 };

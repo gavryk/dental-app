@@ -24,9 +24,10 @@ const convertTime = (time) => {
   return `${hh}:${mm}`;
 }
 
-const AddAppointmentScreen = ({ navigation }) => {
+const AddAppointmentScreen = ({ navigation, route }) => {
   const [datePick, setDatePick] = useState(new Date());
   const [timePick, setTimePick] = useState(new Date());
+  const patientId = route.params;
 
   const [values, setValues] = useState({
     diagnosis: "Pulpit",
@@ -34,6 +35,7 @@ const AddAppointmentScreen = ({ navigation }) => {
     price: "",
     date: `${datePick.getMonth() + 1}.${datePick.getDate()}.${datePick.getFullYear()}`,
     time: convertTime(timePick),
+    patient: patientId
   });
 
   React.useLayoutEffect(() => {
@@ -85,107 +87,109 @@ const AddAppointmentScreen = ({ navigation }) => {
 
   return (
     <Container>
-      <NativeBaseProvider style={{ flex: 1 }}>
-        <Stack space={4} mx={1}>
-          <Center>
-            <Input
-              type="number"
-              keyboardType="numeric"
-              p={5}
-              w="95%"
-              size="xl"
-              variant="underlined"
-              placeholder="Dent Number"
-              label="Dent Number"
-              value={values.dentNumber}
-              onChange={(e) => handleChange("dentNumber", e)}
-              clearButtonMode="while-editing"
-            />
-          </Center>
-          <Center>
-            <Select
-              height="50"
-              minWidth="95%"
-              accessibilityLabel="Choose Diagnosis"
-              placeholder="Choose Diagnosis"
-              variant="underlined"
-              style={{ fontSize: 18, paddingLeft: 15 }}
-              placeholderTextColor="dark.500"
-              _selectedItem={{
-                bg: "coolGray.200",
-                endIcon: <CheckIcon size="5" />,
-              }}
-              mt={1}
-              onValueChange={(e) => setFieldValue("diagnosis", e)}
-              selectedValue={values.diagnosis}
-            >
-              <Select.Item label="Pulpit" value="Pulpit" />
-              <Select.Item label="Periodontitis" value="Periodontitis" />
-              <Select.Item label="Oral cancer" value="Oral Cancer" />
-              <Select.Item label="Tooth Abscesses" value="Tooth Abscesses" />
-              <Select.Item label="Prosthetics" value="Prosthetics" />
-            </Select>
-          </Center>
-          <Center>
-            <Input
-              type="number"
-              keyboardType="numeric"
-              p={5}
-              w="95%"
-              size="xl"
-              variant="underlined"
-              placeholder="Price"
-              label="Price"
-              value={values.price}
-              onChange={(e) => handleChange("price", e)}
-              clearButtonMode="while-editing"
-            />
-          </Center>
-          <DateTimeView>
-            <DateTimePicker
-              style={{
-                backgroundColor: "white",
-                flexBasis: "30%",
-                width: "30%",
-              }}
-              value={datePick}
-              maximumDate={new Date(2300, 10, 20)}
-              minimumDate={new Date(1950, 0, 1)}
-              dateFormat="dayofweek day month"
-              mode="date"
-              display="compact"
-              onChange={(e, selectedDate) => {
-                const currentDate = selectedDate || date;
-                setDatePick(currentDate);
-                let formattedDate = `${
-                  currentDate.getMonth() + 1
-                }.${currentDate.getDate()}.${currentDate.getFullYear()}`;
-                setFieldValue("date", formattedDate);
-              }}
-            />
-            <DateTimePicker
-              style={{
-                width: "100%",
-                flex: 1,
-              }}
-              value={timePick}
-              mode="time"
-              timeZoneOffsetInMinutes={60}
-              onChange={(e, selectedTime) => {
-                setTimePick(selectedTime);
-                let myDate = convertTime(selectedTime);
-                setFieldValue("time", myDate);
-              }}
-            />
-          </DateTimeView>
-        </Stack>
+      <NativeBaseProvider>
+        <View style={{ flex: 1 }}>
+          <Stack space={4} mx={1}>
+            <Center>
+              <Input
+                type="number"
+                keyboardType="numeric"
+                p={5}
+                w="95%"
+                size="xl"
+                variant="underlined"
+                placeholder="Dent Number"
+                label="Dent Number"
+                value={values.dentNumber}
+                onChange={(e) => handleChange("dentNumber", e)}
+                clearButtonMode="while-editing"
+              />
+            </Center>
+            <Center>
+              <Select
+                height="50"
+                minWidth="95%"
+                accessibilityLabel="Choose Diagnosis"
+                placeholder="Choose Diagnosis"
+                variant="underlined"
+                style={{ fontSize: 18, paddingLeft: 15 }}
+                placeholderTextColor="dark.500"
+                _selectedItem={{
+                  bg: "coolGray.200",
+                  endIcon: <CheckIcon size="5" />,
+                }}
+                mt={1}
+                onValueChange={(e) => setFieldValue("diagnosis", e)}
+                selectedValue={values.diagnosis}
+              >
+                <Select.Item label="Pulpit" value="Pulpit" />
+                <Select.Item label="Periodontitis" value="Periodontitis" />
+                <Select.Item label="Oral cancer" value="Oral Cancer" />
+                <Select.Item label="Tooth Abscesses" value="Tooth Abscesses" />
+                <Select.Item label="Prosthetics" value="Prosthetics" />
+              </Select>
+            </Center>
+            <Center>
+              <Input
+                type="number"
+                keyboardType="numeric"
+                p={5}
+                w="95%"
+                size="xl"
+                variant="underlined"
+                placeholder="Price"
+                label="Price"
+                value={values.price}
+                onChange={(e) => handleChange("price", e)}
+                clearButtonMode="while-editing"
+              />
+            </Center>
+            <DateTimeView>
+              <DateTimePicker
+                style={{
+                  backgroundColor: "white",
+                  flexBasis: "30%",
+                  width: "30%",
+                }}
+                value={datePick}
+                maximumDate={new Date(2300, 10, 20)}
+                minimumDate={new Date(1950, 0, 1)}
+                dateFormat="dayofweek day month"
+                mode="date"
+                display="compact"
+                onChange={(e, selectedDate) => {
+                  const currentDate = selectedDate || date;
+                  setDatePick(currentDate);
+                  let formattedDate = `${
+                    currentDate.getMonth() + 1
+                  }.${currentDate.getDate()}.${currentDate.getFullYear()}`;
+                  setFieldValue("date", formattedDate);
+                }}
+              />
+              <DateTimePicker
+                style={{
+                  width: "100%",
+                  flex: 1,
+                }}
+                value={timePick}
+                mode="time"
+                timeZoneOffsetInMinutes={60}
+                onChange={(e, selectedTime) => {
+                  setTimePick(selectedTime);
+                  let myDate = convertTime(selectedTime);
+                  setFieldValue("time", myDate);
+                }}
+              />
+            </DateTimeView>
+          </Stack>
+        </View>
+        <ButtonView>
+          <CustomButton onPress={onSubmit} color="#2A86FF">
+            <Ionicons name="ios-add" size={24} color="white" />
+            <Text>Add Appointment</Text>
+          </CustomButton>
+        </ButtonView>
       </NativeBaseProvider>
-      <ButtonView>
-        <CustomButton onPress={onSubmit} color="#2A86FF">
-          <Ionicons name="ios-add" size={24} color="white" />
-          <Text>Add Appointment</Text>
-        </CustomButton>
-      </ButtonView>
     </Container>
   );
 };
@@ -202,7 +206,7 @@ const DateTimeView = styled.View`
 
 const ButtonView = styled.View`
   width: 100%;
-  height: auto;
+  height: 100%;
   flex: 1;
   justify-content: flex-start;
   flex-direction: row;
