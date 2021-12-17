@@ -20,12 +20,12 @@ const Appointment = ({ navigate, item }) => {
             {patient.fullname[0].toUpperCase()}
           </Letter>
         </Avatar>
-        
+
         <View style={{ flex: 1 }}>
           <FullName>{patient.fullname}</FullName>
           <GreyText>{diagnosis}</GreyText>
         </View>
-        <Badge active={active}>{time}</Badge>
+        {time && <Badge active={active}>{time}</Badge>}
       </GroupItem>
     </TouchableWithoutFeedback>
   );

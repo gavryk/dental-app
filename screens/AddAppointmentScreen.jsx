@@ -11,7 +11,7 @@ import {
   Stack,
 } from "native-base";
 import { CustomButton } from "../components";
-import { appointmentsApi } from "../utils/api";
+import { appointmentsApi } from "../utils";
 import DateTimePicker from "@react-native-community/datetimepicker";
 
 const convertTime = (time) => {
@@ -78,10 +78,15 @@ const AddAppointmentScreen = ({ navigation, route }) => {
     appointmentsApi
       .add(values)
       .then(() => {
-        navigation.navigate("Home", { lastUpdate: new Date() });
+        navigation.navigate("Home", { lastUpdateTime: new Date() });
       })
       .catch((e) => {
-        alert("BAD");
+        if (e.response.data && e.response.data.message) {
+          e.response.data.message.forEach((err) => {
+            const fieldName = err.param;
+            alert(`Error! Field "${fieldsName[fieldName]}" is incorrect.`);
+          });
+        }
       });
   };
 
@@ -153,7 +158,7 @@ const AddAppointmentScreen = ({ navigation, route }) => {
                 }}
                 value={datePick}
                 maximumDate={new Date(2300, 10, 20)}
-                minimumDate={new Date(1950, 0, 1)}
+                minimumDate={new Date()}
                 dateFormat="dayofweek day month"
                 mode="date"
                 display="compact"
@@ -197,7 +202,7 @@ const AddAppointmentScreen = ({ navigation, route }) => {
 const DateTimeView = styled.View`
   display: flex;
   flex: 1;
-  width: 100%;
+  width: 98%;
   justify-content: space-between;
   flex-direction: row;
   align-items: center;

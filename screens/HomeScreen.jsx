@@ -1,14 +1,19 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components/native";
-import { SectionList, Alert } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
+import { SectionList, Alert, LogBox, TouchableOpacity, Text } from "react-native";
 import { Appointment, SectionTitle, PlusButton, SwipeableButtons } from "../components";
 import Swipeable from "react-native-gesture-handler/Swipeable";
-import { appointmentsApi } from "../utils/api";
+import { appointmentsApi } from "../utils";
 
 const HomeScreen = ({ navigation, route }) => {
   const [data, setData] = useState(null);
   const [isLoading, setIsLoading] = React.useState(false);
   const [lastUpdateTime, setlastUpdateTime] = useState(null);
+
+  LogBox.ignoreLogs([
+    "Non-serializable values were found in the navigation state",
+  ]);
   
   React.useLayoutEffect(() => {
     navigation.setOptions({
@@ -20,7 +25,15 @@ const HomeScreen = ({ navigation, route }) => {
       headerTitleStyle: {
         fontWeight: "bold",
         fontSize: "18px",
-      }
+      },
+      headerRight: () => (
+        <TouchableOpacity
+          onPress={() => navigation.navigate("Patients")}
+          style={{ marginRight: 5 }}
+        >
+          <Ionicons name="people" size={24} color="white" />
+        </TouchableOpacity>
+      ),
     });
   }, [navigation]);
 
@@ -40,18 +53,18 @@ const HomeScreen = ({ navigation, route }) => {
 
   useEffect(fetchAppointments, [route.params]);
 
-  const removeAppointments = (id) => {
-     Alert.alert(
-      'Delete Appointment',
-      'Are you sure you want to delete the appointment?',
+  const removeItem = (id) => {
+    Alert.alert(
+      "Delete Appointment",
+      "Are you sure you want to delete the appointment?",
       [
         {
-          text: 'Cancel',
-          onPress: () => console.log('Cancel Pressed'),
-          style: 'cancel'
+          text: "Cancel",
+          onPress: () => console.log("Cancel Pressed"),
+          style: "cancel",
         },
         {
-          text: 'Delete',
+          text: "Delete",
           onPress: () => {
             setIsLoading(true);
             appointmentsApi
@@ -62,12 +75,12 @@ const HomeScreen = ({ navigation, route }) => {
               .catch(() => {
                 setIsLoading(false);
               });
-          }
-        }
+          },
+        },
       ],
       { cancelable: false }
     );
-  }
+  };
   
   
   return (
@@ -81,7 +94,7 @@ const HomeScreen = ({ navigation, route }) => {
           renderItem={({ item }) => (
             <Swipeable
               renderRightActions={(progress) =>
-                SwipeableButtons(progress, item._id, removeAppointments)
+                SwipeableButtons(progress, item._id, removeItem)
               }
             >
               <Appointment navigate={navigation.navigate} item={item} />

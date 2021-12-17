@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { Ionicons } from "@expo/vector-icons";
 import { Center, Input, NativeBaseProvider, FormControl , Stack } from "native-base";
 import { CustomButton } from "../components";
-import { patientsApi } from "../utils/api";
+import { patientsApi } from "../utils";
 
 const AddPatientScreen = ({ navigation }) => {
   const [values, setValues] = useState({});
@@ -38,7 +38,7 @@ const AddPatientScreen = ({ navigation }) => {
     patientsApi
       .add(values)
       .then(() => {
-        navigation.navigate("Home");
+        navigation.navigate("Patients", { lastUpdateTime: new Date() });
       })
       .catch((e) => {
         alert("BAD");

@@ -6,7 +6,7 @@ import {
 import { Ionicons } from "@expo/vector-icons";
 import { MaterialIcons } from '@expo/vector-icons'; 
 
-const SwipeableButtons = (progress, id, removeAppointments) => {
+const SwipeableButtons = (progress, id, removeItem) => {
   const scale = progress.interpolate({
     inputRange: [0, 100],
     outputRange: [0, 1],
@@ -14,14 +14,26 @@ const SwipeableButtons = (progress, id, removeAppointments) => {
   });
   return (
     <>
-      <View style={{ backgroundColor: "#ee3434", justifyContent: "center", padding: 20 }}>
-        <TouchableOpacity onPress={() => removeAppointments(id)}>
-            <Ionicons name="ios-close" size={28} color="white" />
+      <View
+        style={{
+          backgroundColor: "#ee3434",
+          justifyContent: "center",
+          padding: 20,
+        }}
+      >
+        <TouchableOpacity onPress={() => removeItem(id)}>
+          <Ionicons name="ios-close" size={28} color="white" />
         </TouchableOpacity>
       </View>
-      <View style={{ backgroundColor: "#b0b5b9", justifyContent: "center", padding: 20 }}>
+      <View
+        style={{
+          backgroundColor: "#b0b5b9",
+          justifyContent: "center",
+          padding: 20,
+        }}
+      >
         <TouchableOpacity>
-            <MaterialIcons name="edit" size={28} color="white" />
+          <MaterialIcons name="edit" size={28} color="white" />
         </TouchableOpacity>
       </View>
     </>
