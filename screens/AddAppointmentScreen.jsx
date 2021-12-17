@@ -166,7 +166,7 @@ const AddAppointmentScreen = ({ navigation }) => {
             <DateTimePicker
               style={{
                 width: "100%",
-                flex: 1
+                flex: 1,
               }}
               value={timePick}
               mode="time"
@@ -180,7 +180,7 @@ const AddAppointmentScreen = ({ navigation }) => {
           </DateTimeView>
         </Stack>
       </NativeBaseProvider>
-      <ButtonView style={{ justifyContent: "flex-start" }}>
+      <ButtonView>
         <CustomButton onPress={onSubmit} color="#2A86FF">
           <Ionicons name="ios-add" size={24} color="white" />
           <Text>Add Appointment</Text>
@@ -203,13 +203,17 @@ const DateTimeView = styled.View`
 const ButtonView = styled.View`
   width: 100%;
   height: auto;
-  flex: .1;
+  flex: 1;
+  justify-content: flex-start;
+  flex-direction: row;
+  align-items: flex-start;
   margin-bottom: 50px;
 `;
 
 const Container = styled.View`
   background-color: #fff;
   flex: 1;
+  justify-content: flex-start;
   padding-top: 30px;
   height: 100%;
 `;
