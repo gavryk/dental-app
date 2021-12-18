@@ -13,7 +13,7 @@ const AddPatientScreen = ({ navigation }) => {
     navigation.setOptions({
       title: "Add Patient",
       headerStyle: {
-        backgroundColor: "#2a9714",
+        backgroundColor: "#1c467c",
         elevation: 0.8,
         shadowOpacity: 0.8,
       },

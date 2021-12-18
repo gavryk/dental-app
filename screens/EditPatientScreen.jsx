@@ -13,8 +13,11 @@ import { CustomButton } from "../components";
 import { patientsApi } from "../utils";
 
 const EditPatientScreen = ({ navigation, route }) => {
-  const [values, setValues] = useState({});
-  const { fullname, phone, _id } = route.params;
+    const { fullname, phone, _id } = route.params;
+  const [values, setValues] = useState({
+      fullname,
+      phone
+  });
 
   React.useLayoutEffect(() => {
     navigation.setOptions({

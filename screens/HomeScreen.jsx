@@ -82,6 +82,9 @@ const HomeScreen = ({ navigation, route }) => {
     );
   };
   
+  const editItem = (item) => {
+    navigation.navigate("EditAppointment", item);
+  };
   
   return (
     <Container>
@@ -94,7 +97,7 @@ const HomeScreen = ({ navigation, route }) => {
           renderItem={({ item }) => (
             <Swipeable
               renderRightActions={(progress) =>
-                SwipeableButtons(progress, item._id, removeItem)
+                SwipeableButtons(progress, item._id, removeItem, editItem, item)
               }
             >
               <Appointment navigate={navigation.navigate} item={item} />
